@@ -1671,3 +1671,82 @@ section,
   width: 100%;
   height: auto;
 }
+
+/*--------------------------------------------------------------
+# Requirements Page Specific Styles
+--------------------------------------------------------------*/
+.goals-list {
+  list-style: none;
+  padding: 0;
+}
+
+.goals-list li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.goals-list li i {
+  color: var(--accent-color);
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.persona-card {
+  background: var(--surface-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.persona-card img {
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.persona-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.moscow-category {
+  background: var(--surface-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.moscow-category h3 {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.moscow-category ul {
+  list-style: none;
+  padding: 0;
+}
+
+.moscow-category ul li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.moscow-category ul li:last-child {
+  border-bottom: none;
+}
+
+.use-case {
+  background: var(--surface-color);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.use-case h3 {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+}
