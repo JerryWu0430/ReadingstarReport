@@ -1671,3 +1671,499 @@ section,
   width: 100%;
   height: auto;
 }
+
+/*--------------------------------------------------------------
+# Requirements Page Specific Styles
+--------------------------------------------------------------*/
+.goals-list {
+  list-style: none;
+  padding: 0;
+}
+
+.goals-list li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.goals-list li i {
+  color: var(--accent-color);
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.persona-card {
+  background: var(--surface-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.persona-card img {
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.persona-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.moscow-category {
+  background: var(--surface-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.moscow-category h3 {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.moscow-category ul {
+  list-style: none;
+  padding: 0;
+}
+
+.moscow-category ul li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.moscow-category ul li:last-child {
+  border-bottom: none;
+}
+
+.use-case {
+  background: var(--surface-color);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.use-case h3 {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+}
+
+/*--------------------------------------------------------------
+# Research Page Specific Styles
+--------------------------------------------------------------*/
+.project-card {
+  background: var(--surface-color);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.project-card h3 {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+}
+
+.project-analysis h4 {
+  font-size: 18px;
+  margin: 20px 0 10px 0;
+}
+
+.project-analysis ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.project-analysis ul li {
+  padding: 5px 0;
+  position: relative;
+  padding-left: 25px;
+}
+
+.project-analysis ul li:before {
+  content: "•";
+  color: var(--accent-color);
+  position: absolute;
+  left: 0;
+}
+
+.tech-card {
+  background: var(--surface-color);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  text-align: center;
+}
+
+.tech-icon {
+  font-size: 40px;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+}
+
+.tech-details {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.tech-details h4 {
+  font-size: 16px;
+  margin: 15px 0 10px 0;
+}
+
+.tech-details ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tech-details ul li {
+  padding: 3px 0;
+  font-size: 14px;
+}
+
+.summary-content {
+  background: var(--surface-color);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.summary-content h3 {
+  color: var(--accent-color);
+  margin: 20px 0 15px 0;
+}
+
+.summary-content h3:first-child {
+  margin-top: 0;
+}
+
+.references-list {
+  background: var(--surface-color);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.reference-item {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.reference-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.reference-text {
+  margin: 0;
+  font-size: 14px;
+}
+
+/*--------------------------------------------------------------
+# Algorithms Page Specific Styles
+--------------------------------------------------------------*/
+.algorithm-card,
+.data-card,
+.experiment-content,
+.discussion-content,
+.conclusion-content {
+  background: var(--surface-color);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.algorithm-details h4,
+.experiment-content h3,
+.discussion-content h3 {
+  color: var(--accent-color);
+  margin: 20px 0 15px 0;
+}
+
+.algorithm-details ul,
+.improvement-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.algorithm-details ul li,
+.improvement-list li {
+  padding: 5px 0;
+  position: relative;
+  padding-left: 25px;
+}
+
+.improvement-list li i {
+  color: var(--accent-color);
+  margin-right: 10px;
+}
+
+.metrics-table {
+  margin: 20px 0;
+}
+
+.results-chart {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.results-chart img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/*--------------------------------------------------------------
+# UI Design Page Specific Styles
+--------------------------------------------------------------*/
+.principle-card {
+  background: var(--surface-color);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.principle-card:hover {
+  transform: translateY(-5px);
+}
+
+.principle-icon {
+  font-size: 40px;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+}
+
+.principle-card h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.sketch-card {
+  background: var(--surface-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.sketch-card img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.sketch-card:hover img {
+  transform: scale(1.05);
+}
+
+.sketch-info {
+  padding: 20px;
+}
+
+.sketch-info h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--accent-color);
+}
+
+.wireframe-container {
+  background: var(--surface-color);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.figma-embed {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.wireframe-description {
+  margin-top: 30px;
+}
+
+.wireframe-description h3 {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  padding: 10px 20px;
+  border-radius: 4px;
+  color: var(--contrast-color);
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+  border-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+}
+
+/*--------------------------------------------------------------
+# System Design Page Specific Styles
+--------------------------------------------------------------*/
+.architecture-diagram,
+.sitemap-diagram,
+.class-diagram,
+.er-diagram {
+  background: var(--surface-color);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.component-card,
+.diagram-card,
+.pattern-card,
+.api-card {
+  background: var(--surface-color);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.component-descriptions h3,
+.diagram-info h3,
+.pattern-card h3,
+.api-card h3 {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+}
+
+.pattern-icon {
+  font-size: 40px;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.package-list,
+.api-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.package-list li,
+.api-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.package-list li:last-child,
+.api-list li:last-child {
+  border-bottom: none;
+}
+
+.api-list code {
+  display: block;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.diagram-card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.diagram-info {
+  padding: 15px 0;
+}
+
+/*--------------------------------------------------------------
+# Implementation Page Specific Styles
+--------------------------------------------------------------*/
+.overview-content,
+.feature-content {
+  background: var(--surface-color);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.tech-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tech-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tech-list li:last-child {
+  border-bottom: none;
+}
+
+.libraries-used ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.libraries-used li {
+  margin-bottom: 20px;
+}
+
+.libraries-used li strong {
+  color: var(--accent-color);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.code-example {
+  margin: 20px 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.code-example pre {
+  margin: 0;
+  padding: 20px;
+  background: #2d2d2d;
+  color: #fff;
+}
+
+.code-example code {
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+}
+
+.sequence-flow {
+  margin-top: 30px;
+}
+
+.sequence-flow img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+.feature-description h3,
+.libraries-used h3,
+.implementation-details h3,
+.sequence-flow h3 {
+  color: var(--accent-color);
+  margin: 25px 0 15px 0;
+}
+
+.feature-description h3:first-child {
+  margin-top: 0;
+}

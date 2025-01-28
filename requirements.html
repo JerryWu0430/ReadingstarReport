@@ -4,8 +4,25 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Requirements - Project</title>
+  <title>Requirements - ReadingStar</title>
+  
+  <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 </head>
 
@@ -15,19 +32,28 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
+        <h1 class="sitename">ReadingStar</h1> 
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="requirements.html" class="active">Requirements</a></li>
+          <li><a href="requirements.html">Requirements</a></li>
           <li><a href="research.html">Research</a></li>
+          <li><a href="algorithms.html">Algorithms</a></li>
+          <li><a href="ui-design.html">UI Design</a></li>
           <li><a href="system-design.html">System Design</a></li>
           <li><a href="implementation.html">Implementation</a></li>
           <li><a href="testing.html">Testing</a></li>
           <li><a href="evaluation.html">Evaluation</a></li>
-          <li><a href="appendices.html">Appendices</a></li>
+          <li class="dropdown"><a href="#"><span>Appendices</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="user-manual.html">User & Deployment Manual</a></li>
+              <li><a href="gdpr-privacy.html">GDPR and Privacy of Data</a></li>
+              <li><a href="development-blog.html">Development Blog</a></li>
+              <li><a href="monthly-video.html">Monthly Video</a></li>
+            </ul>
+          </li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -36,19 +62,165 @@
   </header>
 
   <main class="main">
-    <section class="section">
+
+    <!-- Background & Client Section -->
+    <section id="background" class="section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Background & Client</h2>
+        <p>Understanding the context and our client's needs</p>
+      </div>
       <div class="container">
-        <h2>Requirements</h2>
-        <p>Details about the project requirements go here.</p>
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <p>Details about project background and client information...</p>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- Project Goals Section -->
+    <section id="goals" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Project Goals</h2>
+        <p>Key objectives and aims of the project</p>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <ul class="goals-list">
+              <li><i class="bi bi-check-circle"></i> Goal 1</li>
+              <li><i class="bi bi-check-circle"></i> Goal 2</li>
+              <li><i class="bi bi-check-circle"></i> Goal 3</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Requirement Gathering Section -->
+    <section id="gathering" class="section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Requirement Gathering</h2>
+        <p>Our approach to collecting and analyzing requirements</p>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="gathering-methods">
+              <h3>Methods Used</h3>
+              <p>Details about requirement gathering methods...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Personas Section -->
+    <section id="personas" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Personas</h2>
+        <p>Understanding our target users</p>
+      </div>
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="persona-card">
+              <img src="assets/img/personas/persona1.jpg" class="img-fluid" alt="Persona 1">
+              <h3>Persona Name 1</h3>
+              <p>Description of persona 1...</p>
+            </div>
+          </div>
+          <!-- Add more persona cards as needed -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Use Cases</h2>
+        <p>Key scenarios and user interactions</p>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="use-case">
+              <h3>Use Case 1</h3>
+              <p>Description of use case 1...</p>
+            </div>
+            <!-- Add more use cases as needed -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MoSCoW List Section -->
+    <section id="moscow" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>MoSCoW List</h2>
+        <p>Prioritized requirements classification</p>
+      </div>
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-6" data-aos="fade-up">
+            <div class="moscow-category">
+              <h3>Must Have</h3>
+              <ul>
+                <li>Requirement 1</li>
+                <li>Requirement 2</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up">
+            <div class="moscow-category">
+              <h3>Should Have</h3>
+              <ul>
+                <li>Requirement 1</li>
+                <li>Requirement 2</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up">
+            <div class="moscow-category">
+              <h3>Could Have</h3>
+              <ul>
+                <li>Requirement 1</li>
+                <li>Requirement 2</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up">
+            <div class="moscow-category">
+              <h3>Won't Have</h3>
+              <ul>
+                <li>Requirement 1</li>
+                <li>Requirement 2</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer id="footer" class="footer">
-    <div class="container text-center">
-      <p>&copy; 2023 Project Name. All Rights Reserved.</p>
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1">ReadingStar</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
     </div>
   </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <script src="assets/js/main.js"></script>
 

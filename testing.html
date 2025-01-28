@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Testing - ReadingStar</title>
+  
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1 class="sitename">ReadingStar</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="requirements.html">Requirements</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="algorithms.html">Algorithms</a></li>
+          <li><a href="ui-design.html">UI Design</a></li>
+          <li><a href="system-design.html">System Design</a></li>
+          <li><a href="implementation.html">Implementation</a></li>
+          <li><a href="testing.html" class="active">Testing</a></li>
+          <li><a href="evaluation.html">Evaluation</a></li>
+          <li class="dropdown"><a href="#"><span>Appendices</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="user-manual.html">User & Deployment Manual</a></li>
+              <li><a href="gdpr-privacy.html">GDPR and Privacy of Data</a></li>
+              <li><a href="development-blog.html">Development Blog</a></li>
+              <li><a href="monthly-video.html">Monthly Video</a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Testing Strategy Section -->
+    <section id="testing-strategy" class="section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Testing Strategy</h2>
+        <p>Comprehensive overview of our testing approach and methodologies</p>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="testing-content">
+              <h3>Overview</h3>
+              <p>Our testing strategy follows a comprehensive approach that includes various testing levels and methodologies to ensure the quality and reliability of ReadingStar.</p>
+              
+              <div class="testing-phases mt-4">
+                <h4>Testing Phases</h4>
+                <ul class="feature-list">
+                  <li><i class="bi bi-check-circle"></i> Unit Testing</li>
+                  <li><i class="bi bi-check-circle"></i> Integration Testing</li>
+                  <li><i class="bi bi-check-circle"></i> System Testing</li>
+                  <li><i class="bi bi-check-circle"></i> User Acceptance Testing</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Unit and Integration Testing Section -->
+    <section id="unit-integration" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Unit and Integration Testing</h2>
+        <p>Detailed testing of individual components and their interactions</p>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="testing-content">
+              <div class="test-category">
+                <h3>Unit Testing</h3>
+                <div class="test-details">
+                  <h4>Tools Used</h4>
+                  <ul class="feature-list">
+                    <li><i class="bi bi-tools"></i> Jest for JavaScript testing</li>
+                    <li><i class="bi bi-tools"></i> PyTest for Python components</li>
+                  </ul>
+                  
+                  <h4>Test Coverage</h4>
+                  <div class="coverage-stats">
+                    <p>Overall code coverage: 85%</p>
+                    <!-- Add coverage chart or detailed stats here -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="test-category mt-4">
+                <h3>Integration Testing</h3>
+                <div class="test-details">
+                  <h4>Approach</h4>
+                  <p>Description of integration testing approach...</p>
+                  
+                  <h4>Key Integration Test Cases</h4>
+                  <ul class="feature-list">
+                    <li><i class="bi bi-check2-square"></i> API Integration Tests</li>
+                    <li><i class="bi bi-check2-square"></i> Database Integration Tests</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compatibility Testing Section -->
+    <section id="compatibility" class="section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Compatibility Testing</h2>
+        <p>Testing across different platforms and environments</p>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="testing-content">
+              <h3>Browser Compatibility</h3>
+              <div class="compatibility-matrix">
+                <!-- Add browser compatibility matrix here -->
+              </div>
+
+              <h3 class="mt-4">Device Compatibility</h3>
+              <div class="device-testing">
+                <!-- Add device testing results here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Responsive Design Testing Section -->
+    <section id="responsive-design" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Responsive Design Testing</h2>
+        <p>Testing application behavior across different screen sizes</p>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="testing-content">
+              <h3>Responsive Breakpoints</h3>
+              <div class="breakpoints-table">
+                <!-- Add responsive breakpoints testing results -->
+              </div>
+
+              <h3 class="mt-4">Visual Regression Testing</h3>
+              <div class="visual-testing">
+                <!-- Add visual regression testing results -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance Testing Section -->
+    <section id="performance" class="section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Performance Testing</h2>
+        <p>Load testing and performance optimization results</p>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="testing-content">
+              <h3>Load Testing Results</h3>
+              <div class="performance-metrics">
+                <!-- Add performance metrics and charts -->
+              </div>
+
+              <h3 class="mt-4">Stress Testing</h3>
+              <div class="stress-test-results">
+                <!-- Add stress testing results -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- User Acceptance Testing Section -->
+    <section id="user-acceptance" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>User Acceptance Testing</h2>
+        <p>Results from user testing sessions and feedback</p>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="testing-content">
+              <h3>Test Cases</h3>
+              <div class="test-cases">
+                <!-- Add user test cases -->
+              </div>
+
+              <h3 class="mt-4">User Feedback</h3>
+              <div class="user-feedback">
+                <!-- Add user feedback summary -->
+              </div>
+
+              <h3 class="mt-4">Partner Feedback</h3>
+              <div class="partner-feedback">
+                <!-- Add project partner feedback -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1">ReadingStar</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
