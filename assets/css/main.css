@@ -261,6 +261,8 @@ h6 {
     display: flex;
     list-style: none;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   .navmenu li {
@@ -270,8 +272,8 @@ h6 {
   .navmenu a,
   .navmenu a:focus {
     color: var(--nav-color);
-    padding: 18px 15px;
-    font-size: 14px;
+    padding: 18px 10px;
+    font-size: 13px;
     font-family: var(--nav-font);
     font-weight: 500;
     text-transform: uppercase;
@@ -354,6 +356,12 @@ h6 {
     top: 0;
     left: -100%;
     visibility: visible;
+  }
+
+  /* Adjust logo and header container */
+  .header .container-fluid {
+    max-width: 1400px;
+    margin: 0 auto;
   }
 }
 
@@ -1617,6 +1625,49 @@ section,
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
+
+.hero-background {
+  position: relative;
+  background-color: transparent;
+}
+
+.hero-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../img/App.png');
+  background-size: 65% auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.hero-background .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-background h2,
+.hero-background p {
+  color: var(--heading-color);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/*--------------------------------------------------------------
+# Gantt Chart Section
+--------------------------------------------------------------*/
+.gantt-container {
+  background-color: var(--surface-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.gantt-container img {
+  width: 100%;
+  height: auto;
 }
