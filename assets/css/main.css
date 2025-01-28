@@ -2010,3 +2010,79 @@ section,
   background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
   border-color: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
+
+/*--------------------------------------------------------------
+# System Design Page Specific Styles
+--------------------------------------------------------------*/
+.architecture-diagram,
+.sitemap-diagram,
+.class-diagram,
+.er-diagram {
+  background: var(--surface-color);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.component-card,
+.diagram-card,
+.pattern-card,
+.api-card {
+  background: var(--surface-color);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.component-descriptions h3,
+.diagram-info h3,
+.pattern-card h3,
+.api-card h3 {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+}
+
+.pattern-icon {
+  font-size: 40px;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.package-list,
+.api-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.package-list li,
+.api-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.package-list li:last-child,
+.api-list li:last-child {
+  border-bottom: none;
+}
+
+.api-list code {
+  display: block;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.diagram-card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.diagram-info {
+  padding: 15px 0;
+}
