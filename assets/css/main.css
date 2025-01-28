@@ -1864,3 +1864,58 @@ section,
   margin: 0;
   font-size: 14px;
 }
+
+/*--------------------------------------------------------------
+# Algorithms Page Specific Styles
+--------------------------------------------------------------*/
+.algorithm-card,
+.data-card,
+.experiment-content,
+.discussion-content,
+.conclusion-content {
+  background: var(--surface-color);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.algorithm-details h4,
+.experiment-content h3,
+.discussion-content h3 {
+  color: var(--accent-color);
+  margin: 20px 0 15px 0;
+}
+
+.algorithm-details ul,
+.improvement-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.algorithm-details ul li,
+.improvement-list li {
+  padding: 5px 0;
+  position: relative;
+  padding-left: 25px;
+}
+
+.improvement-list li i {
+  color: var(--accent-color);
+  margin-right: 10px;
+}
+
+.metrics-table {
+  margin: 20px 0;
+}
+
+.results-chart {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.results-chart img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
