@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Development Blog - ReadingStar</title>
+  
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1 class="sitename">ReadingStar</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="requirements.html">Requirements</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="algorithms.html">Algorithms</a></li>
+          <li><a href="ui-design.html">UI Design</a></li>
+          <li><a href="system-design.html">System Design</a></li>
+          <li><a href="implementation.html">Implementation</a></li>
+          <li><a href="testing.html">Testing</a></li>
+          <li><a href="evaluation.html">Evaluation</a></li>
+          <li class="dropdown"><a href="#" class="active"><span>Appendices</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="user-manual.html">User & Deployment Manual</a></li>
+              <li><a href="gdpr-privacy.html">GDPR and Privacy of Data</a></li>
+              <li><a href="development-blog.html" class="active">Development Blog</a></li>
+              <li><a href="monthly-video.html">Monthly Video</a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Blog Overview Section -->
+    <section id="blog-overview" class="section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Development Blog</h2>
+        <p>Following our journey in developing ReadingStar</p>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="blog-content">
+              <p>Welcome to our development blog! Here we document our progress, challenges, and learnings throughout the development of ReadingStar. This blog is updated bi-weekly to keep our project partners and stakeholders informed about our progress.</p>
+              
+              <div class="blog-links mt-4">
+                <h3>External Links</h3>
+                <ul class="feature-list">
+                  <li><i class="bi bi-link-45deg"></i> <a href="https://wordpress.com/readingstar" target="_blank">WordPress Blog</a></li>
+                  <li><i class="bi bi-github"></i> <a href="https://github.com/username/readingstar" target="_blank">GitHub Repository</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Entries Section -->
+    <section id="blog-entries" class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <!-- March 2024 -->
+            <div class="blog-entry mb-5">
+              <div class="entry-header">
+                <h3>March 2024: Final Implementation and Testing</h3>
+                <div class="entry-meta">
+                  <span><i class="bi bi-calendar"></i> March 15, 2024</span>
+                  <span><i class="bi bi-person"></i> Team ReadingStar</span>
+                </div>
+              </div>
+              
+              <div class="entry-content mt-3">
+                <h4>Highlights</h4>
+                <ul class="feature-list">
+                  <li><i class="bi bi-check-circle"></i> Completed user authentication system</li>
+                  <li><i class="bi bi-check-circle"></i> Implemented real-time speech recognition</li>
+                  <li><i class="bi bi-check-circle"></i> Conducted comprehensive testing</li>
+                </ul>
+
+                <div class="entry-media mt-4">
+                  <h4>Implementation Screenshots</h4>
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <img src="assets/img/blog/march-2024-1.png" alt="Authentication System" class="img-fluid rounded shadow">
+                    </div>
+                    <div class="col-md-6">
+                      <img src="assets/img/blog/march-2024-2.png" alt="Speech Recognition" class="img-fluid rounded shadow">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="code-snippet mt-4">
+                  <h4>Featured Code: Speech Recognition Implementation</h4>
+                  <pre><code class="language-javascript">
+// Speech recognition initialization
+const recognition = new webkitSpeechRecognition();
+recognition.continuous = true;
+recognition.interimResults = true;
+
+recognition.onresult = (event) => {
+  const result = event.results[event.results.length - 1];
+  const transcript = result[0].transcript;
+  processTranscript(transcript);
+};
+                  </code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- February 2024 -->
+            <div class="blog-entry mb-5">
+              <div class="entry-header">
+                <h3>February 2024: UI Development and Algorithm Refinement</h3>
+                <div class="entry-meta">
+                  <span><i class="bi bi-calendar"></i> February 29, 2024</span>
+                  <span><i class="bi bi-person"></i> Team ReadingStar</span>
+                </div>
+              </div>
+              
+              <div class="entry-content mt-3">
+                <h4>Key Developments</h4>
+                <ul class="feature-list">
+                  <li><i class="bi bi-check-circle"></i> Implemented responsive UI design</li>
+                  <li><i class="bi bi-check-circle"></i> Enhanced speech processing algorithm</li>
+                  <li><i class="bi bi-check-circle"></i> Added progress tracking features</li>
+                </ul>
+
+                <div class="entry-media mt-4">
+                  <h4>UI Design Progress</h4>
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <img src="assets/img/blog/feb-2024-1.png" alt="UI Design" class="img-fluid rounded shadow">
+                    </div>
+                    <div class="col-md-6">
+                      <img src="assets/img/blog/feb-2024-2.png" alt="Progress Tracking" class="img-fluid rounded shadow">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="research-findings mt-4">
+                  <h4>Research Findings</h4>
+                  <p>Summary of our research into speech processing algorithms and their implementation...</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- January 2024 -->
+            <div class="blog-entry mb-5">
+              <div class="entry-header">
+                <h3>January 2024: Project Initialization and Research</h3>
+                <div class="entry-meta">
+                  <span><i class="bi bi-calendar"></i> January 15, 2024</span>
+                  <span><i class="bi bi-person"></i> Team ReadingStar</span>
+                </div>
+              </div>
+              
+              <div class="entry-content mt-3">
+                <h4>Initial Steps</h4>
+                <ul class="feature-list">
+                  <li><i class="bi bi-check-circle"></i> Project requirements gathering</li>
+                  <li><i class="bi bi-check-circle"></i> Technology stack selection</li>
+                  <li><i class="bi bi-check-circle"></i> Initial system architecture design</li>
+                </ul>
+
+                <div class="entry-media mt-4">
+                  <h4>System Architecture</h4>
+                  <img src="assets/img/blog/jan-2024-1.png" alt="System Architecture" class="img-fluid rounded shadow">
+                </div>
+
+                <div class="research-summary mt-4">
+                  <h4>Research Summary</h4>
+                  <p>Overview of our initial research into reading assistance technologies...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1">ReadingStar</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
