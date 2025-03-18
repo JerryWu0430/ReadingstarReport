@@ -73,13 +73,56 @@
         <div class="row">
           <div class="col-lg-12" data-aos="fade-up">
             <div class="overview-content">
-              <p>Brief overview of the implementation approach and key technologies used...</p>
               <div class="tech-stack">
-                <h3>Technology Stack</h3>
+                <h3>Main Technologies Used</h3>
                 <ul class="tech-list">
-                  <li><strong>Frontend:</strong> Technologies used...</li>
-                  <li><strong>Backend:</strong> Technologies used...</li>
-                  <li><strong>Database:</strong> Technologies used...</li>
+                  <li>
+                    <strong>Frontend:</strong> <br> 
+                    <div class="text-center">
+                      <img src="assets/img/avatar.png" alt="React Native Logo" class="img-fluid mt-2" style="width: 80px; height: auto;">
+                    </div>
+                    <br>
+                    React Native Windows - React Native is a frontend development framework based on JavaScript which enables the creation of native Windows desktop applications; the NAS schools primarily use Intel powered Windows devices. It allows for building accessible and visually engaging UI components suitable, and facilitates communication with the backend server through API requests.
+                    <br>
+                    <br>
+                    <div class = "text-center">
+                        <img src="assets/img/youtube.png" alt="YouTube Logo" class="img-fluid mt-2" style="width: 80px; height: auto;">
+                    </div> <br>
+                    YouTube Embed API - API by YouTube to integrate embedded video players directly into the application, allowing for the legal streaming of songs. Additionally, it provides timestamps and lyrics, useful for matching with the recognized text.
+                    </li>
+                  <li><strong>Backend</strong>:
+                    <br>
+                    <div class = "text-center">
+                        <img src = "assets/img/python.png" alt = "Python Logo" class = "img-fluid mt-2" style = "width: 80px; height: auto;">
+                    </div>
+                    <br>
+                    Python - Python is used as the backend development language for Readingstar primarily due to its extensive libraries and frameworks for streamlining the integration of AI models. Openvino pipelines, pytorch, and transformers modules in Python allowed for the efficient development and deployment of AI models into the application
+                    <br>
+                    <br>
+                    <div class = "text-center">
+                        <img src = "assets/img/fastapi.png" alt = "FastAPI Logo" class = "img-fluid mt-2" style = "width: 140px; height: auto;">
+                    </div>
+                    <br>
+                    FastAPI serves as a framework for exposing Python functionality to the frontend through API endpoints. FastAPI was chosen over other frameworks like Django as it is faster and supports asynchronous programming, needed for handling live audio processing and serving data to the frontend in real-time. It works with an ASGI Uvicorn server for high performance handling of requests.
+                  <li><strong>AI & ML:</strong>
+                    <div class = "text-center">
+                        <img src = "assets/img/openvino.png" alt = "OpenVINO Logo" class = "img-fluid mt-2" style = "width: 150px; height: auto;">
+                    </div>
+                    OpenVino - Using the OpenVino toolkit developed by Intel to optimize the inference of these AI models for faster inference on Intel hardware, where most NAS schools use Intel hardware. Provides predefined pipelines for the AI models, and increases inference speed by 3-5x. 
+                    <br>
+                    <br>
+                    <div class = "text-center">
+                        <img src = "assets/img/openai.png" alt = "OpenAI Whisper" class = "img-fluid mt-2" style = "width: 140px; height: auto;">
+                    </div>
+                    <br>
+                    OpenAI Whisper - ASR model by OpenAI. Specifically the tiny.en model for fast transcription and focused on the english language.
+                    <br>
+                    <div class = "text-center">
+                        <img src = "assets/img/hf.png" alt = "Transformers Logo" class = "img-fluid mt-2" style = "width: 80px; height: auto;">
+                    </div>
+                    <br>
+                    HuggingFace AllMiniLM - Transformer based model for the semantic matching of texts. 
+                    </li>
                 </ul>
               </div>
             </div>
@@ -88,6 +131,58 @@
       </div>
     </section>
 
+    <!-- Embedding Feature -->
+    <section id="youtube-embed" class="section light-background">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>YouTube IFrame</h2>
+          <p>Implementation of YouTube's IFrame API</p>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12" data-aos="fade-up">
+              <div class="feature-content">
+                <div class = "feature-description">
+                    <h3>Overview</h3>
+                    <p>YouTube's IFrame API is used to embed YouTube videos directly into the application. Subtitles are extracted from the video along with their timestamps to display the lyrics.</p>
+              </div>
+              <div class = "implementation-details">
+                  <h3>Implementation Details</h3>
+                  The user copies the link for a YouTube video and pastes it into a url input box at the top of the application.
+                  <div class = "code-example">
+                    <pre><code class="language-javascript">
+{!isFocusMode &amp;&amp; (
+    &lt;View style={styles.inputContainer}&gt;
+        &lt;TextInput
+            style={[
+                styles.textInput,
+                colorScheme === 'dark' &amp;&amp; styles.textInputDark,
+            ]}
+            placeholder="Paste YouTube URL here"
+            placeholderTextColor={colorScheme === 'dark' ? '#ccc' : '#999'} 
+            value={inputUrl} 
+            onChangeText={setInputUrl} 
+        /&gt;
+        &lt;Pressable
+            style={({ pressed }) =&gt; [
+                { backgroundColor: pressed ? '#005bb5' : '#0078d4' },
+                styles.goButton,
+                pressed &amp;&amp; { backgroundColor: '#005bb5' },
+            ]}
+            onPress={() =&gt; {
+                setYoutubeUrl(inputUrl);
+                getYoutubeEmbedUrl(inputUrl);
+            }}
+        &gt;
+            &lt;Text style={styles.goButtonText}&gt;Go&lt;/Text&gt;
+        &lt;/Pressable&gt;
+    &lt;/View&gt;
+)}
+                    </code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+  
     <!-- Speech Recognition Feature -->
     <section id="speech-recognition" class="section">
       <div class="container section-title" data-aos="fade-up">
