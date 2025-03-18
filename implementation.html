@@ -147,8 +147,9 @@
               </div>
               <div class = "implementation-details">
                   <h3>Implementation Details</h3>
-                  Firstly, the user copies the link for a YouTube video and pastes it into a url input placeholder at the top of the application.
                   <div class = "code-example">
+                    Firstly, the user copies the link for a YouTube video and pastes it into a url input placeholder at the top of the application.
+                    <br>
                     <pre><code class="language-javascript">
 {!isFocusMode &amp;&amp; (
     &lt;View style={styles.inputContainer}&gt;
@@ -249,6 +250,7 @@ useEffect(() => {
 }, [currentTime, lyrics]);
             </code></pre>
             <br>
+            checkMatch is called to evaluate the similarity between the recognized text and the current lyric; this method will be discussed in the "Evaluation & Scoring" section.
             The function also calls startMatching, providing the current lyric as a parameter. <br> 
             <pre><code class="language-javascript">
 const startMatching = async (lyric : string) => {
@@ -297,7 +299,7 @@ useEffect(() => {
     <section id="speech-recognition" class="section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Automatic Speech Recognition</h2>
-        <p>Implementation of live speech recognition</p>
+        <p>Implementation of ASR and integrating it into the application</p>
       </div>
       <div class="container">
         <div class="row">
@@ -305,15 +307,21 @@ useEffect(() => {
             <div class="feature-content">
               <div class="feature-description">
                 <h3>Overview</h3>
-                <p>Description of the speech recognition implementation...</p>
+                <p>Automatic speech recognition (ASR) is a key feature in Readingstar, allowing users to sing into a microphone, transcribe the audio in real-time and provide feedback.</p>
               </div>
               
               <div class="libraries-used">
                 <h3>Libraries and APIs</h3>
                 <ul>
                   <li>
-                    <strong>Library Name v1.2.3</strong>
-                    <p>How and why this library was used...</p>
+                    <strong>openvino_genai</strong>
+                    <p>Provides classes that contain pipelines for optimising inference on intel hardware, specific to the model.</p>
+                    <strong>optimum</strong>
+                    <p>Used to convert the format of AI models</p>
+                    <strong>numpy</strong>
+                    <p>Used for preprocessing the audio for model inputs.</p>
+                    <strong>speechrecognition</strong>
+                    <p>Captures audio from the microphone or audio file</p>
                   </li>
                 </ul>
               </div>
@@ -321,20 +329,108 @@ useEffect(() => {
               <div class="implementation-details">
                 <h3>Implementation Details</h3>
                 <div class="code-example">
+                    The model used for transcribing audio is Whisper Tiny, which was converted into ONNX format as an intermediary, and the OpenVino Intermediate Representation (IR) format for inferenece. These conversions where done using the optimum library from the terminal. 
+                    Once the model was converted to OpenVino IR format, the WhisperPipeline was used to prepare for inference.
+                    WhisperPipeline is a high-level class within openvino_genai that encapsulates a pipeline for optimised inference on intel hardware for the Whisper model.
                   <pre><code class="language-javascript">
-// Example code snippet
-function initializeSpeechRecognition() {
-    // Implementation details...
-}
+# Set up OpenVINO and device
+device = "AUTO"
+# Adjust the model path to be relative to the executable location
+model_dir = os.path.join(getattr(sys, '_MEIPASS', os.path.dirname(__file__)), "whisper-tiny-en-openvino")
+
+# Check if the model directory exists
+if not os.path.exists(model_dir):
+    raise FileNotFoundError(f"Model directory not found at {model_dir}")
+
+# Check if the necessary model files exist
+model_files = ["openvino_tokenizer.xml", "openvino_tokenizer.bin"]
+for file in model_files:
+    if not os.path.exists(os.path.join(model_dir, file)):
+        raise FileNotFoundError(f"Model file {file} not found in directory {model_dir}")
+
+try:
+    ov_pipe = ov_genai.WhisperPipeline(model_dir, device=device)
+except Exception as e:
+    sys.exit(1)
                   </code></pre>
-                </div>
-                <p>Explanation of the code implementation...</p>
+                  <br>
+                  An instance of the WhisperPipeline is used, along with the desired inference device to create the pipeline.
+                  The inference device is set to Auto as the application can run on CPU, NPU, and GPU devices. The pipeline selects the best available device for inference.
+                <br><br>
+                The parameters for ASR are defined after testing different energy thresholds and timeouts. Along with the ASR setup, shared variables are defined to store the previous and current lyric phrases, the current match, and the audio recording setup.
+                <pre><code class="language-javascript">
+# Audio recording setup
+energy_threshold = 500
+record_timeout = 2.0
+phrase_timeout = 3.0
+phrase_time = None
+data_queue = Queue()
+recorder = sr.Recognizer()
+recorder.energy_threshold = energy_threshold
+recorder.dynamic_energy_threshold = True
+
+
+# Shared variables
+prev_verse = ""  # The previous lyric phrase
+current_verse = ""  # The current lyric phrase
+data_queue = Queue()
+current_match = {"text": None, "similarity": 0.0}
+source = sr.Microphone(sample_rate=16000)
+                </code></pre>
+                <br>
+                The audio recording setup and shared variables are defined, ready for the ASR process to begin. The process is initiated through an API request from the frontend shown in the "YouTube Embedding & Lyric Synchronisation" section once a video starts playing. The API request invokes the process_audio method.
+                The process_audio method combines two main functionalities, namely the live transcription of a phrase and the collection of audio data for the entire song.
+                <pre><code class="language-javascript">
+# Transcription process
+@app.post("/transcribe")
+def process_audio():
+    """
+    Record audio, process it, and compare it to the current lyric.
+    """
+    print("Transcription process started")
+    global stop_call, source
+    with source:
+        recorder.adjust_for_ambient_noise(source)
+    stop_call = recorder.listen_in_background(source, record_callback, phrase_time_limit=record_timeout)
+
+    global phrase_time, phrase_timeout, recognized_text, stop_flag, recorded_audio
+    stop_flag = False
+    recorded_audio = io.BytesIO() 
+    try:
+        while not stop_flag:
+            now = datetime.utcnow()
+            if not data_queue.empty():
+                #Collect chunk of audio data and append to queue
+                phrase_time = now
+                audio_data = b''.join(data_queue.queue)
+                audio_chunk = data_queue.get()
+                # Write audio chunk to recorded audio file
+                recorded_audio.write(audio_chunk)
+                data_queue.queue.clear()
+                # Convert audio data to numpy array and run the openvino whisper pipeline
+                audio_np = np.frombuffer(audio_data, np.int16).astype(np.float32) / 32768.0
+                genai_result = ov_pipe.generate(audio_np)
+                # Generate recognized text transcription
+                recognized_text = str(genai_result).strip()
+                print(f"Recognized: {recognized_text}")
+            else:
+                sleep(0.1)
+        print("Recording stopped, saving file...")
+        save_audio_to_file(recorded_audio.getvalue())
+    except Exception as e:
+        print(f"Error during transcription: {e}")
+
+                </pre></code>
+                <br>
+                <p>The transcription process starts by recording audio continuously, breaking it into chunks, and adding it to a buffer. As the audio is being processed, it uses a background listener to collect the audio data and pass it to the transcription system.</p>
+                <p>The method uses a queue system to handle chunks of audio data efficiently, ensuring smooth real-time transcription while simultaneously accumulating the entire song's audio.</p>
+                <p>The previously instantiated OpenVino pipeline is leveraged to transcribe the audio chunk, and the recognized text is stored for further use.</p></div>
               </div>
 
               <div class="sequence-flow">
-                <h3>Process Flow</h3>
-                <img src="assets/img/implementation/speech-flow.png" class="img-fluid" alt="Speech Recognition Flow">
-                <p>Explanation of the process flow...</p>
+                <h3>Process Sequence</h3>
+                <img src="assets/img/seqlive.png" class="img-fluid" alt="Speech Recognition Flow">
+                <p>The sequence diagram illustrates the flow of the ASR process, from the user singing into the microphone to the application displaying feedback, and the API requests carried out.</p>
               </div>
             </div>
           </div>
@@ -343,9 +439,9 @@ function initializeSpeechRecognition() {
     </section>
 
     <!-- Audio Processing Feature -->
-    <section id="audio-processing" class="section light-background">
+    <section id="scoring" class="section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Audio Processing</h2>
+        <h2>Evaluation & Scoring</h2>
         <p>Implementation of audio analysis and feedback</p>
       </div>
       <div class="container">
@@ -359,27 +455,11 @@ function initializeSpeechRecognition() {
       </div>
     </section>
 
-    <!-- Database Integration -->
-    <section id="database" class="section">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Database Integration</h2>
-        <p>Implementation of data storage and retrieval</p>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12" data-aos="fade-up">
-            <div class="feature-content">
-              <!-- Similar structure as above -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- User Authentication -->
-    <section id="authentication" class="section light-background">
+    <section id="playlist" class="section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>User Authentication</h2>
+        <h2>Playlist Management</h2>
         <p>Implementation of user management and security</p>
       </div>
       <div class="container">
@@ -394,9 +474,9 @@ function initializeSpeechRecognition() {
     </section>
 
     <!-- Progress Tracking -->
-    <section id="progress-tracking" class="section">
+    <section id="accessibility" class="section">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Progress Tracking</h2>
+        <h2>Accessibility Features</h2>
         <p>Implementation of user progress monitoring</p>
       </div>
       <div class="container">
