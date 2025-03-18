@@ -134,7 +134,7 @@
     <!-- Embedding Feature -->
     <section id="youtube-embed" class="section light-background">
         <div class="container section-title" data-aos="fade-up">
-          <h2>YouTube IFrame</h2>
+          <h2>YouTube Embedding & Lyric Synchronisation</h2>
           <p>Implementation of YouTube's IFrame API</p>
         </div>
         <div class="container">
@@ -143,11 +143,11 @@
               <div class="feature-content">
                 <div class = "feature-description">
                     <h3>Overview</h3>
-                    <p>YouTube's IFrame API is used to embed YouTube videos directly into the application. Subtitles are extracted from the video along with their timestamps to display the lyrics.</p>
+                    <p>YouTube's IFrame API is used to embed YouTube videos directly into the application. Subtitles are extracted from the video along with their timestamps to display the lyrics, and a progress bar is used to enhance the interactive experience.</p>
               </div>
               <div class = "implementation-details">
                   <h3>Implementation Details</h3>
-                  The user copies the link for a YouTube video and pastes it into a url input box at the top of the application.
+                  Firstly, the user copies the link for a YouTube video and pastes it into a url input placeholder at the top of the application.
                   <div class = "code-example">
                     <pre><code class="language-javascript">
 {!isFocusMode &amp;&amp; (
@@ -179,6 +179,116 @@
 )}
                     </code></pre>
             </div>
+            <div class = "code-example">
+                Once the user enters the url and presses the 'Go' button, the video is embedded into the application. The entered url is stored using setYoutubeUrl state and the getYoutubeEmbedUrl function is called to extract the video id and embed the video.
+                <br>
+                <pre><code class="language-javascript">
+const getYoutubeEmbedUrl = async (url: string): Promise<void> => {
+    const videoId: string | undefined = url.split('v=')[1];
+    const ampersandPosition: number = videoId ? videoId.indexOf('&') : -1;
+    const finalVideoId: string | undefined = ampersandPosition !== -1 ? videoId.substring(0, ampersandPosition) : videoId;
+    setEmbedUrl(`https://www.youtube.com/embed/${finalVideoId}?autoplay=1&controls=0&encrypted-media=1`);
+    getSongTitle(url);
+    setVideoPlaying(true);
+    fetchYoutubeSubtitles(url);
+    try {
+        const response = await fetch('http://localhost:8000/close_microphone', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    }
+    catch (error) {}
+    
+    try {
+        const response = await fetch('http://localhost:8000/transcribe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        console.log('Transcription started');
+    } catch (error) {
+        console.error('Failed to start transcription:', error);
+    }
+};     
+                </code></pre>
+                <br>
+                After extracting the video ID and embedding the video into the application, the getYouTubeEmbedUrl function interacts with YouTube's API to get the song title and calls fetchYoutube subtitles to fetch the subtitles for the video. The function then sends a GET request to the backend to ensure the microphone is closed before sending a POST request /transcribe to initiate the speech recognition process.
+          </div>
+          <div class = "code-example">
+            The fetchYoutubeSubtitles function fetches the subtitles and pre-processes them to extract the lyrics and their timestamps. The lyrics are then displayed on the screen by setting the setCurrentLyric state. <br> 
+            <pre><code class="language-javascript">
+useEffect(() => {
+    if (currentTime) {
+        const elapsedTime = currentTime;
+
+        // Find the current lyric based on elapsed time
+        var currentLyric = lyrics.reduce(
+            (prev, curr) => (curr.time <= elapsedTime ? curr : prev),
+            { lyric: '' }
+        ).lyric;
+
+
+        // Only update and call startMatching if the lyric has changed
+        if (currentLyric !== previousLyricRef.current) {
+            console.log('Updating Lyric:', currentLyric);
+            previousLyricRef.current = currentLyric; // Update previous lyric
+            setCurrentLyric(currentLyric); // Update state
+            startMatching(currentLyric); // Call startMatching
+            checkMatch();
+        }
+
+    }
+}, [currentTime, lyrics]);
+            </code></pre>
+            <br>
+            The function also calls startMatching, providing the current lyric as a parameter. <br> 
+            <pre><code class="language-javascript">
+const startMatching = async (lyric : string) => {
+    try {
+            await fetch('http://localhost:8000/update_lyric', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ lyric }),
+        });
+    } catch (error) {
+        console.error('Error starting phrase matching:', error);
+    }
+}; 
+            </code></pre>
+            <br>
+            The startMatching function sends a POST request /update_lyric to the backend to update the current lyric for the phrase matching process.
+            <br> <br>
+            Additionally, a sliding bar is animated to show the progress of the current phrase being displayed.
+            <br>
+            <pre><code class="language-javascript">
+useEffect(() => {
+    if (currentLyric) {
+        const currentIndex = lyrics.findIndex(lyric => lyric.lyric === currentLyric);
+        const nextLyric = lyrics[currentIndex + 1];
+        const duration = nextLyric ? (nextLyric.time - lyrics[currentIndex].time) * 1000 : 2000;
+
+        Animated.timing(animatedValue, {
+            toValue: 1,
+            duration: duration,
+            useNativeDriver: false,
+        }).start(() => {
+            animatedValue.setValue(0);
+        });
+    }
+}, [currentLyric]);
+            </code></pre>
+            <br>
+            This tracks the current lyric using the timestamp and animates a sliding progress bar. Once complete, the animation resets and the next lyric is displayed.
           </div>
         </div>
       </section>
@@ -186,8 +296,8 @@
     <!-- Speech Recognition Feature -->
     <section id="speech-recognition" class="section">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Speech Recognition</h2>
-        <p>Implementation of voice input and processing</p>
+        <h2>Automatic Speech Recognition</h2>
+        <p>Implementation of live speech recognition</p>
       </div>
       <div class="container">
         <div class="row">
