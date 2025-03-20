@@ -448,7 +448,286 @@ def process_audio():
         <div class="row">
           <div class="col-lg-12" data-aos="fade-up">
             <div class="feature-content">
-              <!-- Similar structure as above -->
+                <div class="feature-description">
+                    <h3>Overview</h3>
+                    <p>After the ASR process detailed in the previous section, the application evaluates the recognised phrase in real time. It provides immediate feedback to the user through
+                        visual indicators, and increments the score accordingly. Additionally, at the end of the session, a final score is generated to assess overall performance.
+                    </p>
+                  </div>
+                  
+                  <div class="libraries-used">
+                    <h3>Libraries and APIs</h3>
+                    <ul>
+                      <li>
+                        <strong>optimum</strong>
+                        <p>Extracts the AllMiniLM model used for semantic matching and optimises it using openvino for inference.</p>
+                        <strong>transformers</strong>
+                        <p>Provides AutoTokenizer for processing and tokenizing text inputs, to be used for comparison.</p>
+                        <strong>difflib</strong>
+                        <p>Uses SequenceMatcher to compare text sequences and measure similarity based on syntax.</p>
+                        <strong>sklearn</strong>
+                        <p>Computes cosine similariy for evaluating semantic matching closeness.</p>
+                        <strong>torch</strong>
+                        <p>Provides tensor operations and inference optimisation for the AllMiniLM model.</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="implementation-details">
+                    <h3>Implementation Details</h3>
+                    <div class="code-example">
+                        As shown previously in the 'YouTube Embedding & Lyric Synchronisation' section, function checkMatch() is called once the current lyric is updated.
+                        <br>
+                        <pre><code class="language-javascript">
+const checkMatch = async () => {
+    try {
+        // Call GET /match to check if the server matched the current lyric
+        const response = await fetch("http://localhost:8000/match", {
+            method: "GET",
+        });
+        const result = await response.json(); // Expecting "yes" or "no"
+
+        if (result.match === "yes") {
+            setShowStar(true);
+            setScore(prevScore => prevScore + Math.round(result.similarity * 100));
+            setTimeout(() => setShowStar(false), 3000);
+        }
+        
+    } catch (error) {
+        console.error("Error checking the match:", error);
+    }
+};
+                    </code></pre>
+                    <br>
+                    The checkMatch function sends a GET request /match to the backend which initiates the phrase matching process.
+                    <pre><code class="language-python">
+# FastAPI endpoint to get the current match result
+@app.get("/match")
+def get_match():
+    """
+    Get the current transcription match.
+    """
+    global current_verse, prev_verse
+    global recognized_text
+    global threshold
+    global similarity_over_song
+
+    # remove brackets from the current verse
+    current_verse = current_verse.strip()
+    try:
+        if '[' in current_verse:
+            # remove the text between brackets
+            current_verse = current_verse[:current_verse.find("[")] + current_verse[current_verse.find("]")+1:]
+        if '(' in current_verse:
+            # get the text between brackets
+            current_verse = current_verse[:current_verse.find("(")] + current_verse[current_verse.find(")")+1:]
+        if '\n' in current_verse:
+            current_verse = current_verse.replace('\n', ' ')
+    except:
+        pass
+
+    if current_verse == "":
+        similarity = 0.0
+        return JSONResponse(content={"match": "no", "similarity": 0.0})
+    
+    similarty_prev = SequenceMatcher(None, recognized_text, prev_verse).ratio()
+    similarity_curr = SequenceMatcher(None, recognized_text, current_verse).ratio()
+    similarities = [
+        (similarty_prev, prev_verse),
+        (similarity_curr, current_verse)
+    ]
+    similarity, similarity_verse = max(similarities, key=lambda x: x[0])
+    print(f"\nSimilarity: {similarity}, \nSimilarity verse: {similarity_verse}, \nRecognized text: {recognized_text}")
+    
+    similarity_over_song.append(similarity)
+    
+    if (similarity > threshold) and recognized_text != "":
+        print(f"Last verse: {similarity_verse}", f"Recognized text: {recognized_text}", f"Similarity: {similarity}")
+        return JSONResponse(content={"match": "yes", "similarity": similarity})
+    return JSONResponse(content={"match": "no", "similarity": similarity})                       
+                </code></pre>
+                <br>
+                The backend recieves the GET request and pre-processes the lyric to prepare for comparison. The similarity between the recognized text and the current lyric is calculated using SequenceMatcher from the difflib library. The similarity of the previously recognised phrase is also calculated in case of delayed recognition. The function then returns a JSON response with the match status and similarity score. The match status is set to "yes" if the similarity score exceeds the predefined threshold, 
+                otherwise it is set to "no".
+                <br><br>
+                The frontend awaits a response, and if the match status is "yes", a star animation is displayed, the score is incremented, and the star is hidden after 3 seconds.
+                <pre><code class="language-javascript">
+if (result.match === "yes") {
+    setShowStar(true);
+    setScore(prevScore => prevScore + Math.round(result.similarity * 100));
+    setTimeout(() => setShowStar(false), 3000);
+}
+                </code></pre>
+                <br>
+                The score is incremented by multiplying the similarity score calculated by SequenceMatcher by 100 and rounding it to the nearest integer. The star animation is displayed for 3 seconds to provide feedback to the user.
+
+                <br><br>
+                Users can change the threshold for similarity to adjust the sensitivity of the matching process. This is done by allowing the users to choose between predefined thresholds by selecting one of the 'AI Difficulty' options in the application.
+                <pre><code class="language-javascript">
+&lt;Text style={styles.sectionTitle}&gt;AI Difficulty&lt;/Text&gt;
+&lt;ScrollView horizontal&gt;
+    {[
+        { label: 'Easy', color: '#22c55e' },
+        { label: 'Medium', color: '#f97316' },
+        { label: 'Hard', color: '#dc2626' }
+    ].map(({ label, color }) =&gt; (
+        &lt;Pressable
+            key={label}
+            style={({ pressed }) =&gt; [
+                styles.difficultyOption,
+                difficulty === label &amp;&amp; { backgroundColor: color, borderColor: color },
+                pressed &amp;&amp; { backgroundColor: '#e5e5e5' },
+            ]}
+            onPress={() =&gt; {
+                setDifficulty(label);
+                switchDifficulty(label);
+                try{
+                    fetch('http://localhost:8000/change_threshold', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ level: label }),
+                    });
+                }
+                catch (error) {
+                    console.error('Error changing difficulty:', error);
+                }
+            }}
+        &gt;
+            &lt;Text
+                style={[
+                    styles.difficultyText,
+                    difficulty == label ? { color: '#fff' } : { color },
+                ]}
+            &gt;
+                {label}
+            &lt;/Text&gt;
+        &lt;/Pressable&gt;
+    ))}
+&lt;/ScrollView&gt;
+                </code></pre>
+                <br>
+                The difficulty level is set by the user pressing one of the difficulty buttons, the default is medium. When the user presses the button, an API request /change_threshold is sent to the backend.
+                <pre><code class = "language-python">
+@app.post("/change_threshold")
+def change_threshold(request: ThresholdLevel):
+    """
+    Change the global threshold for the similarity check.
+    """
+    level = request.level
+    global threshold
+    if level == "Easy":
+        threshold = 0.2
+    elif level == "Medium":
+        threshold = 0.35
+    elif level == "Hard":
+        threshold = 0.5
+    print(f"Threshold changed to {threshold}")
+    return JSONResponse(content={"message": f"Threshold changed to {threshold}"}, status_code=200)
+                </code></pre>
+                <br>
+                The POST request is received by the backend and the threshold is updated based on the difficulty level pressed by the user. The thresholds are predefined after testing with different values and are set to 0.2, 0.35, and 0.5 for easy, medium, and hard respectively. Tests were done with students to determine the most suitable thresholds for each difficulty level.
+
+                <br><br>
+                At the end of the session, when a user completes a song, the microphone is closed and the score as well as final % accuracy is displayed to the user.
+                <pre><code class="language-javascript">
+if (cTime === 'video_end') {
+    console.log('Video ended');
+    setVideoPlaying(false);
+    try {
+        await fetch('http://localhost:8000/close_microphone', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        console.log('Microphone stopped');
+    } catch (error) {
+        console.error('Failed to stop microphone:', error);
+    }
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+        const response = await fetch('http://localhost:8000/final_score', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch final score');
+        }
+        
+        const data = await response.json();
+        setFinalScore(data.final_score);
+        
+        console.log("Final Score:", data.final_score);
+    } catch (error) {
+        console.error("Error fetching final score:", error);
+    }
+} else {
+    setCurrentTime(cTime);
+}           
+                </code></pre>
+                <br>
+                The frontend listens for the 'video_end' event, which is triggered when the video ends. The microphone is then closed, and a GET request /final_score is sent to the backend. Once the microphone is closed, 
+                the process loop in the process_audio method is stopped, and the audio collected throughout the session is saved in a wav file.
+                <pre><code class="language-python">
+@app.get("/final_score")
+def final_score():
+'''
+Calculate the final score using the recorded wav and embedding similarity
+'''
+recognized_wav = None
+global full_lyric
+global similarity_over_song
+
+s = process_time()
+duration = 0.0
+try:
+    with wave.open("recorded_audio.wav", "rb") as wf:
+        audio_data = wf.readframes(wf.getnframes())
+        audio_np = np.frombuffer(audio_data, np.int16).astype(np.float32) / 32768.0
+
+        duration = wf.getnframes() / wf.getframerate()
+
+        genai_result = ov_pipe.generate(audio_np)
+        recognized_wav = str(genai_result).strip()
+except Exception as e:
+    print(f"Error during final transcription: {e}")
+similarity= float(embedding_similarity_ov(full_lyric, recognized_wav))
+t = process_time()
+
+print(f"Final similarity: {similarity}")
+print("Recognized wav: ", recognized_wav)
+
+log_song(duration, sum(similarity_over_song) / len(similarity_over_song), similarity, str(t-s))
+return JSONResponse(content={"final_score": similarity}, status_code=200)
+                </code></pre>
+                <br>
+                This triggers the final_score method in the backend, which calculates the final score by comparing the entire song's lyrics with the recognised audio 
+                from the saved wav file of the entire session. The similarity is calculated using the embedding_similarity_ov function, which
+                computes the cosine similarity between the lyrics and the recognised audio. The frontend is the updated with the evaluation.
+                <pre><code class="language-javascript">
+(&lt;View style={styles.overlay}&gt;
+&lt;Text style={{ fontSize: 20, textAlign: 'center' }}&gt;
+    Well done for completing the song "{songTitle}"!
+&lt;/Text&gt;
+{score &gt; 0 ? (
+    &lt;Text style={{ fontSize: 20, textAlign: 'center' }}&gt;
+        You won {score} points!
+    &lt;/Text&gt;
+) : null}
+{finalScore &gt; 0 ? (
+    &lt;Text style={{ fontSize: 20, textAlign: 'center' }}&gt;
+        You were {Math.round(finalScore * 100)}% accurate!
+    &lt;/Text&gt;
+) : null}
+&lt;/View&gt;)
+                </pre></code>
+                <br>
+                The final score from live matching and accuracy from semantic matching are displayed to the user, providing feedback on their performance. The user is informed of the points won and the percentage accuracy achieved.
+              </div>
             </div>
           </div>
         </div>
