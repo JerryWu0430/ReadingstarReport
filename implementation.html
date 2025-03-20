@@ -934,7 +934,93 @@ onPress={() => {
                     <p> Various assistive accessibility features have been implemented such as customisable UI, font size, font style, colour schemes, and line spacing. These features are designed to cater users with assistive needs.
                     </p>
                     <h3>Implementation Details</h3>
-              
+                    <div class = "code-example">
+                    One accessibility features is 'Focus Mode', which hides the playlist and song selection panels to allow the user to focus on the lyrics and the video. This is triggered by the user pressing the 'Focus Mode' button.
+                    <pre><code class="language-javascript">
+&lt;Pressable
+style={({ pressed }) =&gt; [
+    styles.focusButton,
+    pressed &amp;&amp; styles.focusButtonPressed,
+    isFocusMode &amp;&amp; styles.focusButtonActive
+]}
+onPress={() =&gt; setIsFocusMode(!isFocusMode)}
+&gt;
+                        </code></pre>
+                    <br>
+                    Pressing the Focus Mode button sets isFocusMode to true.
+                    <pre><code class="language-javascript">
+&lt;View style={styles.fullscreenBackground}&gt;
+{lyricsSettings.background === 'black' ? (
+    &lt;View style={[styles.solidBackground, { backgroundColor: '#000000' }]} /&gt;
+) : lyricsSettings.background === 'white' ? (
+    &lt;View style={[styles.solidBackground, { backgroundColor: '#FFFFFF' }]} /&gt;
+) : (
+    &lt;Image
+        source={
+            lyricsSettings.background === 'curtain' ? require('./assets/curtain.jpg') :
+            lyricsSettings.background === 'stage' ? require('./assets/stage.jpg') :
+            lyricsSettings.background === 'concert' ? require('./assets/concert.jpg') :
+            null
+        }
+        style={styles.backgroundImage}
+        resizeMode="cover"
+    /&gt;
+)}
+&lt;/View&gt;
+                    </code></pre>
+                    <br>
+                    The video becomes full screen when focus mode is on, hiding all other panels, and the background can be set according to the user's preference. The background, along with other accessibility features, can be set through the settings panel. 
+                    <pre><code class="language-javascript">
+&lt;Pressable
+style={({ pressed }) =&gt; [
+    styles.iconButton,
+    pressed &amp;&amp; styles.iconButtonPressed,
+]}
+onPress={() =&gt; setShowSettingsModal(true)}
+&gt;
+&lt;SvgXml xml={settingsSvg} width={24} height={24} /&gt;
+&lt;/Pressable&gt;
+                    </code></pre>
+                    <br>
+                    Pressing the settings icon in the top right hand corner of the applications opens the settings panel. Within the settings panel, users can change the background, font size, font family, font colour, font style, line spacing, and font size.
+
+                    <br><br>
+                    For example for font colour:
+                    <pre><code class="language-javascript">
+&lt;View style={styles.settingBox}&gt;
+&lt;Text style={styles.settingLabel}&gt;Font Color&lt;/Text&gt;
+&lt;View style={styles.colorPickerContainer}&gt;
+    {[
+        '#000000', // Black
+        '#FF0000', // Red
+        '#FF4500', // Orange Red
+        '#FFA500', // Orange
+        '#FFD700', // Gold/Yellow
+        '#32CD32', // Lime Green
+        '#00FF00', // Green
+        '#00FFFF', // Cyan
+        '#0000FF', // Blue
+        '#4B0082', // Indigo
+        '#800080'  // Purple
+    ].map((color) =&gt; (
+        &lt;Pressable
+            key={color}
+            style={({ pressed }) =&gt; [
+                styles.colorButton,
+                { backgroundColor: color },
+                lyricsSettings.fontColor === color &amp;&amp; styles.colorButtonActive,
+                pressed &amp;&amp; styles.colorButtonPressed,
+            ]}
+            onPress={() =&gt; setLyricsSettings({...lyricsSettings, fontColor: color})}
+        /&gt;
+    ))}
+                    
+    &lt;/View&gt;
+&lt;/View&gt;
+                    </code></pre>
+                    <br>
+                    This allows users to choose between a wide range of colours based on their needs and preferences. Similar can be done for the features listed previously, including background which will change the side panels in focus mode accordingly.
+                    For example, if the background is set to curtain, the side panels will display a curtain background.
             </div>
           </div>
         </div>
