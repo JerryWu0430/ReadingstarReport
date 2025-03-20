@@ -317,11 +317,11 @@ useEffect(() => {
                     <strong>openvino_genai</strong>
                     <p>Provides classes that contain pipelines for optimising inference on intel hardware, specific to the model.</p>
                     <strong>optimum</strong>
-                    <p>Used to convert the format of AI models</p>
+                    <p>Used to convert the format of AI models.</p>
                     <strong>numpy</strong>
                     <p>Used for preprocessing the audio for model inputs.</p>
                     <strong>speechrecognition</strong>
-                    <p>Captures audio from the microphone or audio file</p>
+                    <p>Captures audio from the microphone or audio file.</p>
                   </li>
                 </ul>
               </div>
@@ -739,13 +739,181 @@ return JSONResponse(content={"final_score": similarity}, status_code=200)
     <section id="playlist" class="section light-background">
       <div class="container section-title" data-aos="fade-up">
         <h2>Playlist Management</h2>
-        <p>Implementation of user management and security</p>
+        <p>Implementation of playlist and song management</p>
       </div>
       <div class="container">
         <div class="row">
           <div class="col-lg-12" data-aos="fade-up">
             <div class="feature-content">
-              <!-- Similar structure as above -->
+                <h3>Overview</h3>
+                    <p> Playlists and songs are stored in hierarchical JSON structure. Each playlist is an object containing an id, name, and an array of songs. Each song within
+                        a playlist has its own id, name, as well as a YouTube url. The user can create, delete, and edit playlists and songs, as well as add and remove songs from playlists in an efficient and scalable manner.
+                    </p>
+                    <h3>Implementation Details</h3>
+                    <div class="code-example">
+                        The playlist and song data is stored in a JSON file 'playlists.json', and initially contains pre-curated playlists based on our interactions with the NAS. The JSON structure is as follows:
+                        <br>
+                        <pre><code class="language-json">
+{
+    "playlists": [
+        {
+            "id": 0,
+            "name": "Classic Nursery Rhymes",
+            "songs": [
+                {
+                    "id": 0,
+                    "name": "Humpty Dumpty",
+                    "url": "https://www.youtube.com/watch?v=nrv495corBc"
+                },
+                {
+                    "id": 1,
+                    "name": "The Hokey Cokey",
+                    "url": "https://www.youtube.com/watch?v=YAMYsNe7DMQ"
+                }
+            ]
+        }
+    ]
+}
+                        </code></pre>
+                        <br>
+                        Users can select a playlist from the playlists panel in the right hand side. Once the selected playlist is pressed, the switchPlaylist function is called.
+                        <pre><code class="language-javascript">
+const switchPlaylist = (playlistName: string) => {
+    if (allPlaylistsGetter[playlistName]) {
+        setPlaylistLoaded(false);
+        setPlaylistName(playlistName);
+        console.log('Switching playlist:', playlistName);
+        setPlaylist(allPlaylistsGetter[playlistName]);
+        setPlaylistLoaded(true);
+    } else {
+        console.log('Playlist not found:', playlistName);
+    }
+}
+                    </code></pre>
+                    This takes the playlist name as a parameter and sets the current playlist to the selected playlist.
+                    The user can now select a song from the left hand side panel which displays the songs in the current playlist, and the song is loaded given its YouTube url as shown in the 'YouTube Embedding & Lyric Synchronisation' section.
+                    <br><br>
+                    Users can add to the playlist by pasting a YouTube link to the input field at the top of the application.
+                    <pre><code class="language-javascript">
+// if url not in playlist, fetch song title
+if (!title) {
+    console.log('Fetching song title...');
+    const response = await fetch(url);
+    const html = await response.text();
+    const titleIndex = html.indexOf('<title>');
+    const titleEndIndex = html.indexOf('</title>');
+    title = html.substring(titleIndex+7, titleEndIndex);
+    if (title.includes('YouTube')) {
+        title = title.substring(0, title.indexOf(' - YouTube'));
+    }
+    const songItem = {id: playlist.length, name: title, url: url};
+    setPlaylist([...playlist, songItem]);
+    allPlaylists[playlistName] = [...playlist, songItem];
+    setAllPlaylistsGetter(allPlaylists);
+    updatePlaylistJson([...playlist, songItem]);
+    fetchPlaylists();
+}
+                    </code></pre>
+                    <br>
+                    If the song is not already in the playlist, the program adds the song to the current playlist in the frontend, and calls the updatePlaylistJson function.
+                    <pre><code class = "language-javascript">
+const updatePlaylistJson = async (playlist : {id: number, name: string, url: string}[]) => {
+    try {
+        console.log('Updating playlist:', playlistName, "with", playlist);
+        await fetch('http://localhost:8000/update_playlist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({"name": playlistName, "songs": playlist, "action": "update"}),
+        });
+    } catch (error) {
+        console.error('Error updating playlist:', error);
+    }
+};
+                    </pre></code>
+                    <br>
+                    The updatePlaylistJson sends an API request /update_playlist to the backend, sending as a parameter a JSON with the updated playlist objects, as well as the action to be performed in this case update.
+                    <pre><code class = "language-python">
+# FastAPI endpoint for updating playlist JSON
+@app.post('/update_playlist')
+def update_playlist(playlist: dict):
+    """
+    Update a playlist from the app interface.
+    """
+    with open('playlists.json', 'r') as f:
+        allPlaylists = f.read()
+    
+    allPlaylists = json.loads(allPlaylists)
+    print(f"\nUpdating playlist: {playlist}")
+    action = playlist.pop('action', None)
+
+    # check if this is a delete request
+    if action == "remove":
+        with open('playlists.json', 'w') as f:
+            for pl in allPlaylists["playlists"]:
+                if pl['name'] == playlist['name']:
+                    song = playlist.pop('song', None)
+                    if song:
+                        for s in pl['songs']:
+                            if s["name"] == song:
+                                pl['songs'].remove(s)
+                                print(f"Deleted song: {song}")
+                                break
+                    else:
+                        allPlaylists["playlists"].remove(pl)
+                        print(f"Deleted playlist: {playlist}")
+                    break
+    
+    # check if this is an add request
+    elif action == "create":
+        if playlist['name'] not in [pl['name'] for pl in allPlaylists["playlists"]]:
+            allPlaylists["playlists"].append(playlist)
+            print(f"Added playlist: {playlist}")
+
+    # update the playlist
+    elif action == "update":
+        for pl in allPlaylists["playlists"]:
+            if pl['name'] == playlist['name']:
+                pl['songs'] = playlist['songs']
+                print("Updated playlist: ", pl)
+                break
+
+    with open('playlists.json', 'w') as f:
+        f.write(json.dumps(allPlaylists, indent=4))
+        f.close()
+    
+    return JSONResponse(content={"message": f"{action} completed."}, status_code=200)
+                    </code></pre>
+                    <br>
+                    The backend method update_playlist is used for all playlist management operations. The method reads the current playlist JSON file, and based on the action parameter, either adds, removes, or updates the playlist. In the case of adding a new song to a playlist, the update action is called, which updates the playlist with the new song to be saved in the JSON file.
+                    Deleting a song from a playlist also triggers the update action, this can be done by the user pressing the red icon next to the song title. 
+                    <br><br>
+                    To delete an entire playlist, the user must press the red icon near the playlist name. 
+                    <pre><code class="language-javascript">
+&lt;SvgXml xml={deleteSvg} width={20} height={20} style={styles.iconTag} onPress={() => {removePlaylistJson(playlistName, song.name); fetchPlaylists()}}/>
+                    </code></pre>
+                    <br>
+                    When the icon is pressed, the removePlaylistJson function is called, similar to updatePlaylistJson, but with the action set to remove. This triggers a POST request to the backend update_playlist method with a "remove" action which pops all the songs from the playlist, deletes the playlist, and updates the JSON file.
+                    <br><br>
+                    To create a new playlist, a user must type the playlist name into the input field above the existing playlists and press the icon to the right of the input field.
+                    <pre><code class="language-javascript">
+&lt;SvgXml
+xml={createFolderSvg}
+width={40}
+height={40}
+style={{ alignSelf: 'center', marginLeft: 5 }}
+onPress={() => {
+    createPlaylistJson(newPlaylistName);
+    setNewPlaylistName('');
+}}
+/>
+                    </code></pre>
+                    <br>
+                    This triggers the createPlaylistJson function which is similar to the updatePlaylistJson function, but with the action set to create. This sends a POST request to the backend update_playlist method with a "create" action, which appends the new playlist to the JSON file if it does not already exist.
+                  </div>
+                  </div>
+                  <div>
             </div>
           </div>
         </div>
@@ -756,13 +924,17 @@ return JSONResponse(content={"final_score": similarity}, status_code=200)
     <section id="accessibility" class="section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Accessibility Features</h2>
-        <p>Implementation of user progress monitoring</p>
+        <p>Implementation of assistive features<p>
       </div>
       <div class="container">
         <div class="row">
           <div class="col-lg-12" data-aos="fade-up">
             <div class="feature-content">
-              <!-- Similar structure as above -->
+                <h3>Overview</h3>
+                    <p> Various assistive accessibility features have been implemented such as customisable UI, font size, font style, colour schemes, and line spacing. These features are designed to cater users with assistive needs.
+                    </p>
+                    <h3>Implementation Details</h3>
+              
             </div>
           </div>
         </div>
