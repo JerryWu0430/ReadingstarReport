@@ -62,46 +62,21 @@
 
   <main class="main">
 
+
+
     <!-- System Architecture Section -->
     <section id="architecture" class="section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>System Architecture</h2>
+        <h1>System Design</h1>
+        <div class="mb-4"></div> <!-- This adds space between the headings -->
+        <h2>System Architecture Diagram</h2>
         <p>Overview of system components and their interactions</p>
       </div>
       <div class="container">
         <div class="row">
           <div class="col-lg-12" data-aos="fade-up">
-            <div class="architecture-diagram">
-              <img src="assets/img/system-design/architecture.png" class="img-fluid" alt="System Architecture Diagram">
-            </div>
-            <div class="component-descriptions mt-4">
-              <h3>Component Details</h3>
-              <div class="component-card">
-                <h4>Frontend</h4>
-                <p>Description of frontend components and technologies...</p>
-              </div>
-              <div class="component-card">
-                <h4>Backend</h4>
-                <p>Description of backend services and processing...</p>
-              </div>
-              <!-- Add more component descriptions as needed -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Site Map Section -->
-    <section id="sitemap" class="section">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Site Map</h2>
-        <p>Navigation structure and page hierarchy</p>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12" data-aos="fade-up">
-            <div class="sitemap-diagram">
-              <img src="assets/img/system-design/sitemap.png" class="img-fluid" alt="Site Map">
+            <div class="architecture-diagram text-center">
+              <img src="assets/img/system-design/architecture-diagram.png" class="img-fluid" alt="System Architecture Diagram" style="max-width: 75%;">
             </div>
           </div>
         </div>
@@ -109,85 +84,63 @@
     </section>
 
     <!-- Sequence Diagrams Section -->
-    <section id="sequence" class="section light-background">
+    <section id="sequence" class="section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Sequence Diagrams</h2>
         <p>Key interaction flows within the system</p>
       </div>
       <div class="container">
         <div class="row gy-4">
-          <div class="col-lg-6" data-aos="fade-up">
+          <div class="col-lg-12 mb-4" data-aos="fade-up">
             <div class="diagram-card">
-              <img src="assets/img/system-design/sequence1.png" class="img-fluid" alt="Sequence Diagram 1">
-              <div class="diagram-info">
-                <h3>User Authentication Flow</h3>
-                <p>Description of the authentication process...</p>
+              <h3 class="text-center">Game Sequence Diagram</h3>
+              <div class="text-center mb-4">
+                <img src="assets/img/system-design/game-sequence-diagram.png" class="img-fluid" alt="Game Sequence Diagram" style="max-width: 75%;">
               </div>
             </div>
           </div>
-          <!-- Add more sequence diagrams as needed -->
+          
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="diagram-card">
+              <h3 class="text-center">Audio Processing Diagram</h3>
+              <div class="text-center">
+                <img src="assets/img/system-design/audio-processing-diagram.png" class="img-fluid" alt="Audio Processing Diagram" style="max-width: 75%;">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Design Patterns Section -->
-    <section id="patterns" class="section">
+    <!-- Components and Workflow Section -->
+    <section id="components-workflow" class="section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Design Patterns</h2>
-        <p>Software design patterns implemented</p>
-      </div>
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-4" data-aos="fade-up">
-            <div class="pattern-card">
-              <div class="pattern-icon">
-                <i class="bi bi-diagram-3"></i>
-              </div>
-              <h3>Pattern Name</h3>
-              <p>Description of the design pattern and its implementation...</p>
-            </div>
-          </div>
-          <!-- Add more design patterns as needed -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Class Diagrams Section -->
-    <section id="class-diagrams" class="section light-background">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Class Diagrams</h2>
-        <p>Object-oriented design structure</p>
+        <h2>Components and Workflow</h2>
+        <p>Detailed explanation of system components and their interactions</p>
       </div>
       <div class="container">
         <div class="row">
           <div class="col-lg-12" data-aos="fade-up">
-            <div class="class-diagram">
-              <img src="assets/img/system-design/class-diagram.png" class="img-fluid" alt="Class Diagram">
-              <div class="diagram-description mt-4">
-                <h3>Class Structure</h3>
-                <p>Explanation of the class relationships and design...</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Data Storage Section -->
-    <section id="data-storage" class="section">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Data Storage</h2>
-        <p>Database schema and data organization</p>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12" data-aos="fade-up">
-            <div class="er-diagram">
-              <img src="assets/img/system-design/er-diagram.png" class="img-fluid" alt="ER Diagram">
-              <div class="schema-description mt-4">
-                <h3>Database Schema</h3>
-                <p>Description of the data model and relationships...</p>
-              </div>
+            <div class="workflow-content">
+              <p>User interacts with the game on a laptop with the application installed. They select playlists or songs, sing along, and receive real-time feedback.</p>
+              
+              <h3 class="mt-4">Front End (React Native for Windows)</h3>
+              <p>The Front End is responsible for displaying all of the game's components as well as invoking API calls to run the backend infrastructure:</p>
+              <ul>
+                <li>Has a YouTube embed that displays the music, and writes out the lyrics below the video player.</li>
+                <li>Makes API calls to the back end that sends the input from the microphone to get analysed, then displays the output from the analysis in the form of real-time feedback and a score display using React UI elements.</li>
+                <li>Has playlists and input boxes that provide a wide variety of music choice. These are curated by our team and placed in the playlist.json file in storage.</li>
+                <li>Can dynamically change the matching threshold to make the program easier or harsher.</li>
+              </ul>
+              
+              <h3 class="mt-4">Back End</h3>
+              <p>The Back End receives the audio input and analyses it to return a score:</p>
+              <ul>
+                <li>Two artificial intelligence models: one for transcribing audio input, one for matching the text to the lyrics. Both models are an OpenVINO inference which are optimised to run on Intel hardware.</li>
+                <li>OpenAI's Whisper model, as an OpenVINO inference, transcribes the audio which is sent each sentence.</li>
+                <li>All-miniLM then matches the semantics of the lyrics to the microphone input, which yields the most accurate but lenient results. This synergy achieves our goal of being lenient but still fair, outlined in the Requirements and the Research sections.</li>
+                <li>Back end returns a binary signal that indicates whether a sentence achieved the matching threshold, which then displays the real-time feedback. When the song ends, the overall accuracy is returned as a more detailed form of feedback.</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -195,30 +148,23 @@
     </section>
 
     <!-- Packages and APIs Section -->
-    <section id="packages-apis" class="section light-background">
+    <section id="packages-apis" class="section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Packages and APIs</h2>
         <p>External dependencies and API specifications</p>
       </div>
       <div class="container">
         <div class="row gy-4">
-          <div class="col-lg-6" data-aos="fade-up">
+          <div class="col-lg-12" data-aos="fade-up">
             <div class="api-card">
-              <h3>External Packages</h3>
+              <h3>Key Technologies</h3>
               <ul class="package-list">
-                <li>Package 1 - Description and version</li>
-                <li>Package 2 - Description and version</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-6" data-aos="fade-up">
-            <div class="api-card">
-              <h3>API Endpoints</h3>
-              <ul class="api-list">
-                <li>
-                  <code>GET /api/endpoint</code>
-                  <p>Description of the API endpoint...</p>
-                </li>
+                <li><strong>OpenVINO:</strong> Specifically openvino_genai to optimise AI models.</li>
+                <li><strong>Uvicorn:</strong> To serve an API from the back end to the front end.</li>
+                <li><strong>React Native for Windows:</strong> To make a native and sleek UI.</li>
+                <li><strong>OpenAI's Whisper:</strong> For transcription.</li>
+                <li><strong>All-miniLM:</strong> For semantic matching.</li>
+                <li><strong>Youtube IFrame Player API:</strong> For playing music.</li>
               </ul>
             </div>
           </div>
