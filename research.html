@@ -63,6 +63,14 @@
 
   <main class="main">
 
+    <!-- Introduction Section -->
+    <section id="introduction" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Research</h2>
+        <p>Having identified our goals and personas, we seek to analyse other similar applications to extract what makes a successful karaoke game. Additionally, we explore current technology and potential limitations to inform our design approach. By synthesising these insights we aim to identify best practices and integrate these elements into Reading Star.</p>
+      </div>
+    </section>
+
     <!-- Related Projects Review Section -->
     <section id="related-projects" class="section light-background">
       <div class="container section-title" data-aos="fade-up">
@@ -71,25 +79,99 @@
       </div>
       <div class="container">
         <div class="row gy-4">
-          <div class="col-lg-6" data-aos="fade-up">
+          <div class="col-lg-12" data-aos="fade-up">
             <div class="project-card">
-              <h3>Project 1</h3>
-              <p class="project-description">Description of related project and its relevance...</p>
+              <h3>SingStar 2007</h3>
+              <p class="project-description">Singstar is one of the earliest and most popular examples of a home karaoke video game. The game was developed by Sony and released in 2007 for the Playstation 3. Singstar lets the players sing along to the illuminated words and scores them on the accuracy of the pitch. A prompt comes out after the end of each sentence providing feedback such as "Good" or "Singstar", which then adds a corresponding amount to the score.</p>
+              
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <figure class="text-center">
+                    <img src="assets/img/research/singstar-cover.jpg" alt="Singstar Cover" class="img-fluid rounded" style="max-width: 50%;">
+                    <figcaption class="mt-2">Figure 1: Singstar Cover [4]</figcaption>
+                  </figure>
+                </div>
+                <div class="col-md-6">
+                  <figure class="text-center">
+                    <img src="assets/img/research/singstar-gameplay.jpg" alt="Singstar Gameplay" class="img-fluid rounded">
+                    <figcaption class="mt-2">Figure 2: Singstar gameplay [3]</figcaption>
+                  </figure>
+                </div>
+              </div>
+              
               <div class="project-analysis">
-                <h4>Key Features</h4>
-                <ul>
-                  <li>Feature 1</li>
-                  <li>Feature 2</li>
-                </ul>
-                <h4>Limitations</h4>
-                <ul>
-                  <li>Limitation 1</li>
-                  <li>Limitation 2</li>
-                </ul>
+                <h4>Key Features and Learnings</h4>
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Main Features</th>
+                        <th>What we learn</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Real time scoring</td>
+                        <td>Implementing a reliable score system is important for user engagement and fairness.</td>
+                      </tr>
+                      <tr>
+                        <td>Illuminated lyrics</td>
+                        <td>Visual cues help users follow along and enhance usability.</td>
+                      </tr>
+                      <tr>
+                        <td>Instant feedback with words of encouragement</td>
+                        <td>Immediate feedback can improve user morale and motivate the player.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <p>We also observe the technologies they used in Singstar. The game used fast Fourier transforms (FFT) to analyse the frequency of the input signal, which was then compared to the stored information. [5] The drawback of this is having to manually configure each song's phrases and frequencies, leading to a smaller selection of songs. Additionally, Singstar did not transcribe the lyrics, meaning humming at the right pitch yielded perfect scores as well. Hence, this approach is not viable for our project's goals. However, we have learned of many ways to make the design and UI engaging and entertaining through the analysis of this related project.</p>
               </div>
             </div>
           </div>
-          <!-- Add more project cards as needed -->
+          
+          <div class="col-lg-12 mt-4" data-aos="fade-up">
+            <div class="project-card">
+              <h3>Let's Sing 2024</h3>
+              <p class="project-description">Having looked at one of the best regarded karaoke games of recent times we now observe how a modern implementation of the same genre has evolved for the newest generation of technology. 'Let's Sing 2024' is a karaoke game published by Plaion GmbH for many platforms including the Playstation 5.</p>
+              
+              <div class="text-center mb-4">
+                <figure>
+                  <img src="assets/img/research/lets-sing.jpg" alt="Let's Sing Game" class="img-fluid rounded" style="max-width: 50%;">
+                  <figcaption class="mt-2">Figure 3: Let's Sing Game [1]</figcaption>
+                </figure>
+              </div>
+              
+              <p>Now in this iteration of the genre we see something interesting, Let's Sing will tell you to stop humming if you have not sung the lyrics for an extended period of time. [2] While the game still only judges the score based on your tone, it does not want you to hum the entirety of the song. This means there is some lyrics matching or at least speech-to-text functionality in the game. However, the interesting part is that Let's Sing will not penalise humming, only display a warning. The developers' notion seems to be that overly penalising the words is not the right approach to karaoke. Moreover, we see the same features in the UI that we also noted in Singstars implementation, which reinforce the importance of these elements.</p>
+              
+              <div class="project-analysis">
+                <h4>Key Features and Learnings</h4>
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Main Features</th>
+                        <th>What we learn</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Tone and rhythm matching with small nudges to sing the correct words</td>
+                        <td>Leniency in matching words is best for the enjoyability of a karaoke game.</td>
+                      </tr>
+                      <tr>
+                        <td>Diverse song library</td>
+                        <td>Variety in music encourages users to try more songs and spend more time singing.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+              <p class="mt-4">Overall, we made 5 takeaways by observing what other similar projects have found to be the best way to make a fun karaoke game.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -101,28 +183,49 @@
         <p>Evaluation of potential technologies and frameworks</p>
       </div>
       <div class="container">
+        <div class="row">
+          <div class="col-lg-12 mb-4" data-aos="fade-up">
+            <div class="tech-requirements">
+              <h3>Requirements</h3>
+              <p>Considering our clients' requests, we have some requirements that narrow down the possible technologies:</p>
+              <ul class="requirement-list">
+                <li>Must be native to Windows</li>
+                <li>Must have local Artificial Intelligence</li>
+                <li>Must be optimised for Intel hardware</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
         <div class="row gy-4">
-          <div class="col-lg-4" data-aos="fade-up">
+          <div class="col-lg-12" data-aos="fade-up">
             <div class="tech-card">
               <div class="tech-icon">
-                <i class="bi bi-code-square"></i>
+                <i class="bi bi-window"></i>
               </div>
-              <h3>Technology 1</h3>
+              <h3>Frontend Technologies</h3>
               <div class="tech-details">
-                <h4>Advantages</h4>
-                <ul>
-                  <li>Advantage 1</li>
-                  <li>Advantage 2</li>
-                </ul>
-                <h4>Disadvantages</h4>
-                <ul>
-                  <li>Disadvantage 1</li>
-                  <li>Disadvantage 2</li>
-                </ul>
+                <p>Firstly, we review the frontend technologies that may fit these criteria. Microsoft Foundation Class (MFC) is a popular choice for applications that are designed for older computers, however, after careful consideration we decided MFC did not allow us to create a captivating UI that is essential to a karaoke game.</p>
+                <p>We also considered .NET, which we decided would limit our extensibility. While our current requirements could be met, this would make it difficult to adapt our application to other platforms such as mobile later.</p>
+                <p>Ultimately, we decided React Native for Windows was the right blend of modern looks and native integration.</p>
               </div>
             </div>
           </div>
-          <!-- Add more technology cards as needed -->
+          
+          <div class="col-lg-12 mt-4" data-aos="fade-up">
+            <div class="tech-card">
+              <div class="tech-icon">
+                <i class="bi bi-cpu"></i>
+              </div>
+              <h3>Backend Technologies</h3>
+              <div class="tech-details">
+                <p>There are two main backend requirements: music player and lyrics matching.</p>
+                <p>Looking at how to add the music into the game, we had to find a method that did not infringe intellectual property laws and integrated seamlessly. The choice was made for us by the restrictions of law, we could not license songs individually, and we could not attain them otherwise. Therefore we had to integrate an existing provider into our application, where the only possible choice was the Youtube API. Hence, we decided to embed the Youtube player into the application and stream the songs.</p>
+                <p>For matching lyrics, we found many different models and methods. We looked at open source models and tested their accuracy on prototypes. Since we needed Intel optimisation, we used OpenVINO to increase efficiency on Intel hardware by converting models into an Intermediate Representation (IR).</p>
+                <p>We compared various speech recognition models during our research using various metrics such as the "librispeech performance benchmark", and testing the models locally. Nvidia's canary-1b model outperformed other ASR models in most metrics including Word Error Rate, however when testing with audio from neurodiverse children provided by the National Autistic Society, it failed to accurately transcribe most of the audio. Another model we tested was Vosk, which excels in real-time transcription, essential for our application, however the models are stored in Kaldi nnet3 format which proved difficult to integrate into an openvino pipeline for inference. We finally decided on OpenAI's tiny.en whisper model. Whisper is trained on a much more diverse dataset than Nvidia's Canary, and therefore performed better with neurodiverse speech and different accents, and the small size of the tiny model allowed us to engineer an effective and efficient algorithm for live transcription. Additionally, OpenVino had already created a pipeline for utilizing the whisper model which allowed us to optimize inference on Intel CPUs and NPUs and create an accurate and efficient pipeline for live speech recognition.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -137,12 +240,8 @@
         <div class="row">
           <div class="col-lg-12" data-aos="fade-up">
             <div class="summary-content">
-              <h3>Research Outcomes</h3>
-              <p>Summary of key findings...</p>
-              <h3>Implications</h3>
-              <p>How these findings influence our project...</p>
-              <h3>Next Steps</h3>
-              <p>Recommended actions based on research...</p>
+              <h3>Summary of Technical Decisions</h3>
+              <p>Overall, after reviewing many different potential technologies, we decided to use React Native for Windows, Whisper with OpenVINO, and the Youtube API as the core services of our application. These decisions align well with the project requirements. Our analysis of other similar projects also conclude this approach is feasible and fits in with our takeaways.</p>
             </div>
           </div>
         </div>
@@ -160,12 +259,20 @@
           <div class="col-lg-12" data-aos="fade-up">
             <div class="references-list">
               <div class="reference-item">
-                <p class="reference-text">[1] Author, A. (Year). Title of the work. Publisher/Journal, Volume(Issue), Pages.</p>
+                <p class="reference-text">[1] "Let's sing 2024." Plaion GmbH, Austria, 2024</p>
               </div>
               <div class="reference-item">
-                <p class="reference-text">[2] Author, B. (Year). Title of the work. Publisher/Journal, Volume(Issue), Pages.</p>
+                <p class="reference-text">[2] R. Burke, "Let's sing 2024 review - more on key than not," GamingTrend, https://gamingtrend.com/reviews/lets-sing-2024-review-more-on-key-than-not/ (accessed Mar. 2, 2025).</p>
               </div>
-              <!-- Add more references as needed -->
+              <div class="reference-item">
+                <p class="reference-text">[3] G. Miller, "SingStar Review," IGN, https://www.ign.com/articles/2008/05/20/singstar-review (accessed Feb. 27, 2025).</p>
+              </div>
+              <div class="reference-item">
+                <p class="reference-text">[4] "Singstar." Sony Computer Entertainment, Foster City, Calif, 2007</p>
+              </div>
+              <div class="reference-item">
+                <p class="reference-text">[5] L. Bedigian, "Striking a chord with SingStar Pop's Tamsin Lucas - PS2 News," PS2 Gamezone, https://web.archive.org/web/20070408075151/http://ps2.gamezone.com/news/04_03_07_09_27AM.htm (accessed Feb. 27, 2025).</p>
+              </div>
             </div>
           </div>
         </div>
