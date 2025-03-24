@@ -73,10 +73,12 @@
               <!-- MoSCoW Requirements Table -->
               <div class="moscow-table">
                 <h3>MoSCoW Requirements Achievement</h3>
+                <p>For brevity, each member will be referred to by their initials.</p>
                 <div class="table-responsive">
                   <table class="table table-bordered">
                     <thead>
                       <tr>
+                        <th>ID</th>
                         <th>Requirement</th>
                         <th>Priority</th>
                         <th>Status</th>
@@ -84,7 +86,111 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <!-- Add MoSCoW requirements and their status -->
+                      <tr>
+                          <td>1</td>
+                          <td>M</td>
+                          <td>The system must have offline processing for all core functions including speech recognition and lyric matching.</td>
+                          <td>Success. Other than the YouTube access, the system requires no further internet access to process speech, as the Whisper model is packaged in the executable.</td>
+                          <td>YA, EC, AN</td>
+                      </tr>
+                      <tr>
+                          <td>2</td>
+                          <td>M</td>
+                          <td>The system must have local audio preprocessing optimized for Intel hardware using OpenVINO.</td>
+                          <td>Success. OpenVINO pipeline is utilised, which improves model inference time.</td>
+                          <td>YA, EC</td>
+                      </tr>
+                      <tr>
+                          <td>3</td>
+                          <td>M</td>
+                          <td>The system must have real-time voice-to-lyric matching with support for children’s accents and varied pronunciations.</td>
+                          <td>Success. Algorithm first implemented with the Whisper model in November and improved upon since.</td>
+                          <td>YA, EC, AN</td>
+                      </tr>
+                      <tr>
+                          <td>4</td>
+                          <td>M</td>
+                          <td>The system must have a native Windows application optimized for Intel-based systems with NPUs.</td>
+                          <td></td>
+                          <td>YA, EC, AN, JW</td>
+                      </tr>
+                      <tr>
+                          <td>5</td>
+                          <td>M</td>
+                          <td>The system must have support for YouTube link transcription, allowing teachers to select songs.</td>
+                          <td>Success.</td>
+                          <td>EC, AN</td>
+                      </tr>
+                      <tr>
+                          <td>6</td>
+                          <td>M</td>
+                          <td>The system must have a high-usability interface, accessible to both neurodivergent children and non-technical users.</td>
+                          <td>Success.</td>
+                          <td>JW, AN</td>
+                      </tr>
+                      <tr>
+                          <td>7</td>
+                          <td>S</td>
+                          <td>The system should allow teachers to create and save playlists for the classroom.</td>
+                          <td>Success. Fully functional playlist manager with playlists stored locally.</td>
+                          <td>AN</td>
+                      </tr>
+                      <tr>
+                          <td>8</td>
+                          <td>S</td>
+                          <td>The system should have adjustable playback or difficulty settings to suit individual learners.</td>
+                          <td>Success.</td>
+                          <td>YA</td>
+                      </tr>
+                      <tr>
+                          <td>9</td>
+                          <td>S</td>
+                          <td>The system should have a non-scoring mode for pressure-free learning experiences.</td>
+                          <td>Success. Score may be toggled hidden or shown at any point.</td>
+                          <td>AN</td>
+                      </tr>
+                      <tr>
+                          <td>10</td>
+                          <td>S</td>
+                          <td>The system should have a scoring mode to provide feedback when desired.</td>
+                          <td>Success.</td>
+                          <td>YA</td>
+                      </tr>
+                      <tr>
+                          <td>11</td>
+                          <td>C</td>
+                          <td>The system could have customizable visual themes to personalize the user experience.</td>
+                          <td>Success. Background selector implemented in focus mode.</td>
+                          <td>JW</td>
+                      </tr>
+                      <tr>
+                          <td>12</td>
+                          <td>C</td>
+                          <td>The system could have a reward system (e.g., stars) to increase engagement.</td>
+                          <td>Success.</td>
+                          <td>YA, JW</td>
+                      </tr>
+                      <tr>
+                          <td>13</td>
+                          <td>C</td>
+                          <td>The system could have a focus mode where distracting UI components are removed.</td>
+                          <td>Success.</td>
+                          <td>JW</td>
+                      </tr>
+                      <tr>
+                          <td>14</td>
+                          <td>W</td>
+                          <td>The system won’t store the voices of users to protect the privacy of users.</td>
+                          <td>Success. File is kept solely locally.</td>
+                          <td>-</td>
+                      </tr>
+                      <tr>
+                          <td>15</td>
+                          <td>W</td>
+                          <td>The system won’t use copyrighted songs to ensure GDPR compliance.</td>
+                          <td>Success. No work-around attempted.</td>
+                          <td>-</td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
