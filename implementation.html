@@ -1121,7 +1121,7 @@ onPress={() => setShowSettingsModal(true)}
         block.parentNode.classList.add('line-numbers');
         
         // Escape HTML entities in code blocks to ensure proper rendering
-        if (!block hasAttribute('data-processed')) {
+        if (!block.hasAttribute('data-processed')) {
           block.innerHTML = block.innerHTML
             .replace(/&lt;/g, '<')
             .replace(/&gt;/g, '>')
