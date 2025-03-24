@@ -25,8 +25,65 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
   
-  <!-- Syntax Highlighting -->
-  <link href="assets/vendor/prism/prism.css" rel="stylesheet">
+  <!-- Syntax Highlighting - Updated Setup -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+  <style>
+    pre {
+      background: #f5f5f5;
+      border-radius: 4px;
+      padding: 15px;
+      margin: 15px 0;
+      overflow: auto;
+      max-height: 400px;
+    }
+    code[class*="language-"] {
+      white-space: pre-wrap !important;
+      word-break: break-word;
+    }
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+      color: #6a737d;
+    }
+    .token.punctuation {
+      color: #24292e;
+    }
+    .token.property,
+    .token.tag,
+    .token.boolean,
+    .token.number,
+    .token.constant,
+    .token.symbol,
+    .token.deleted {
+      color: #e36209;
+    }
+    .token.selector,
+    .token.attr-name,
+    .token.string,
+    .token.char,
+    .token.builtin,
+    .token.inserted {
+      color: #22863a;
+    }
+    .token.operator,
+    .token.entity,
+    .token.url,
+    .language-css .token.string,
+    .style .token.string {
+      color: #d73a49;
+    }
+    .token.atrule,
+    .token.attr-value,
+    .token.keyword {
+      color: #0366d6;
+    }
+    .token.function,
+    .token.class-name {
+      color: #6f42c1;
+    }
+  </style>
 </head>
 
 <body>
@@ -144,19 +201,17 @@
                 <div class = "feature-description">
                     <h3>Overview</h3>
                     <p>YouTube's IFrame API is used to embed YouTube videos directly into the application. Subtitles are extracted from the video along with their timestamps to display the lyrics, and a progress bar is used to enhance the interactive experience.</p>
-              </div>
-              <div class = "implementation-details">
-                  <h3>Implementation Details</h3>
-                  <div class = "code-example">
-                    Firstly, the user copies the link for a YouTube video and pastes it into a url input placeholder at the top of the application.
-                    <br>
-                    <pre><code class="language-javascript">
-{!isFocusMode &amp;&amp; (
+                </div>
+                <div class = "implementation-details">
+                    <h3>Implementation Details</h3>
+                    <div class = "code-example">
+                      <p>Firstly, the user copies the link for a YouTube video and pastes it into a url input placeholder at the top of the application.</p>
+                      <pre><code class="language-javascript">{!isFocusMode && (
     &lt;View style={styles.inputContainer}&gt;
         &lt;TextInput
             style={[
                 styles.textInput,
-                colorScheme === 'dark' &amp;&amp; styles.textInputDark,
+                colorScheme === 'dark' && styles.textInputDark,
             ]}
             placeholder="Paste YouTube URL here"
             placeholderTextColor={colorScheme === 'dark' ? '#ccc' : '#999'} 
@@ -167,7 +222,7 @@
             style={({ pressed }) =&gt; [
                 { backgroundColor: pressed ? '#005bb5' : '#0078d4' },
                 styles.goButton,
-                pressed &amp;&amp; { backgroundColor: '#005bb5' },
+                pressed && { backgroundColor: '#005bb5' },
             ]}
             onPress={() =&gt; {
                 setYoutubeUrl(inputUrl);
@@ -177,13 +232,11 @@
             &lt;Text style={styles.goButtonText}&gt;Go&lt;/Text&gt;
         &lt;/Pressable&gt;
     &lt;/View&gt;
-)}
-                    </code></pre>
-            </div>
-            <div class = "code-example">
-                Once the user enters the url and presses the 'Go' button, the video is embedded into the application. The entered url is stored using setYoutubeUrl state and the getYoutubeEmbedUrl function is called to extract the video id and embed the video.
-                <br>
-                <pre><code class="language-javascript">
+)}</code></pre>
+                    </div>
+                    <div class = "code-example">
+                      <p>Once the user enters the url and presses the 'Go' button, the video is embedded into the application. The entered url is stored using setYoutubeUrl state and the getYoutubeEmbedUrl function is called to extract the video id and embed the video.</p>
+                      <pre><code class="language-javascript">
 const getYoutubeEmbedUrl = async (url: string): Promise<void> => {
     const videoId: string | undefined = url.split('v=')[1];
     const ampersandPosition: number = videoId ? videoId.indexOf('&') : -1;
@@ -221,10 +274,10 @@ const getYoutubeEmbedUrl = async (url: string): Promise<void> => {
 };     
                 </code></pre>
                 <br>
-                After extracting the video ID and embedding the video into the application, the getYouTubeEmbedUrl function interacts with YouTube's API to get the song title and calls fetchYoutube subtitles to fetch the subtitles for the video. The function then sends a GET request to the backend to ensure the microphone is closed before sending a POST request /transcribe to initiate the speech recognition process.
+                <p>After extracting the video ID and embedding the video into the application, the getYouTubeEmbedUrl function interacts with YouTube's API to get the song title and calls fetchYoutube subtitles to fetch the subtitles for the video. The function then sends a GET request to the backend to ensure the microphone is closed before sending a POST request /transcribe to initiate the speech recognition process.</p>
           </div>
           <div class = "code-example">
-            The fetchYoutubeSubtitles function fetches the subtitles and pre-processes them to extract the lyrics and their timestamps. The lyrics are then displayed on the screen by setting the setCurrentLyric state. <br> 
+            <p>The fetchYoutubeSubtitles function fetches the subtitles and pre-processes them to extract the lyrics and their timestamps. The lyrics are then displayed on the screen by setting the setCurrentLyric state.</p>
             <pre><code class="language-javascript">
 useEffect(() => {
     if (currentTime) {
@@ -250,8 +303,8 @@ useEffect(() => {
 }, [currentTime, lyrics]);
             </code></pre>
             <br>
-            checkMatch is called to evaluate the similarity between the recognized text and the current lyric; this method will be discussed in the "Evaluation & Scoring" section.
-            The function also calls startMatching, providing the current lyric as a parameter. <br> 
+            <p>checkMatch is called to evaluate the similarity between the recognized text and the current lyric; this method will be discussed in the "Evaluation & Scoring" section.
+            The function also calls startMatching, providing the current lyric as a parameter.</p>
             <pre><code class="language-javascript">
 const startMatching = async (lyric : string) => {
     try {
@@ -268,10 +321,8 @@ const startMatching = async (lyric : string) => {
 }; 
             </code></pre>
             <br>
-            The startMatching function sends a POST request /update_lyric to the backend to update the current lyric for the phrase matching process.
-            <br> <br>
-            Additionally, a sliding bar is animated to show the progress of the current phrase being displayed.
-            <br>
+            <p>The startMatching function sends a POST request /update_lyric to the backend to update the current lyric for the phrase matching process.</p>
+            <p>Additionally, a sliding bar is animated to show the progress of the current phrase being displayed.</p>
             <pre><code class="language-javascript">
 useEffect(() => {
     if (currentLyric) {
@@ -290,7 +341,7 @@ useEffect(() => {
 }, [currentLyric]);
             </code></pre>
             <br>
-            This tracks the current lyric using the timestamp and animates a sliding progress bar. Once complete, the animation resets and the next lyric is displayed.
+            <p>This tracks the current lyric using the timestamp and animates a sliding progress bar. Once complete, the animation resets and the next lyric is displayed.</p>
           </div>
         </div>
       </section>
@@ -329,10 +380,10 @@ useEffect(() => {
               <div class="implementation-details">
                 <h3>Implementation Details</h3>
                 <div class="code-example">
-                    The model used for transcribing audio is Whisper Tiny, which was converted into ONNX format as an intermediary, and the OpenVino Intermediate Representation (IR) format for inferenece. These conversions where done using the optimum library from the terminal. 
+                    <p>The model used for transcribing audio is Whisper Tiny, which was converted into ONNX format as an intermediary, and the OpenVino Intermediate Representation (IR) format for inferenece. These conversions where done using the optimum library from the terminal. 
                     Once the model was converted to OpenVino IR format, the WhisperPipeline was used to prepare for inference.
-                    WhisperPipeline is a high-level class within openvino_genai that encapsulates a pipeline for optimised inference on intel hardware for the Whisper model.
-                  <pre><code class="language-javascript">
+                    WhisperPipeline is a high-level class within openvino_genai that encapsulates a pipeline for optimised inference on intel hardware for the Whisper model.</p>
+                  <pre><code class="language-python">
 # Set up OpenVINO and device
 device = "AUTO"
 # Adjust the model path to be relative to the executable location
@@ -354,11 +405,11 @@ except Exception as e:
     sys.exit(1)
                   </code></pre>
                   <br>
-                  An instance of the WhisperPipeline is used, along with the desired inference device to create the pipeline.
-                  The inference device is set to Auto as the application can run on CPU, NPU, and GPU devices. The pipeline selects the best available device for inference.
+                  <p>An instance of the WhisperPipeline is used, along with the desired inference device to create the pipeline.
+                  The inference device is set to Auto as the application can run on CPU, NPU, and GPU devices. The pipeline selects the best available device for inference.</p>
                 <br><br>
-                The parameters for ASR are defined after testing different energy thresholds and timeouts. Along with the ASR setup, shared variables are defined to store the previous and current lyric phrases, the current match, and the audio recording setup.
-                <pre><code class="language-javascript">
+                <p>The parameters for ASR are defined after testing different energy thresholds and timeouts. Along with the ASR setup, shared variables are defined to store the previous and current lyric phrases, the current match, and the audio recording setup.</p>
+                <pre><code class="language-python">
 # Audio recording setup
 energy_threshold = 500
 record_timeout = 2.0
@@ -378,9 +429,9 @@ current_match = {"text": None, "similarity": 0.0}
 source = sr.Microphone(sample_rate=16000)
                 </code></pre>
                 <br>
-                The audio recording setup and shared variables are defined, ready for the ASR process to begin. The process is initiated through an API request from the frontend shown in the "YouTube Embedding & Lyric Synchronisation" section once a video starts playing. The API request invokes the process_audio method.
-                The process_audio method combines two main functionalities, namely the live transcription of a phrase and the collection of audio data for the entire song.
-                <pre><code class="language-javascript">
+                <p>The audio recording setup and shared variables are defined, ready for the ASR process to begin. The process is initiated through an API request from the frontend shown in the "YouTube Embedding & Lyric Synchronisation" section once a video starts playing. The API request invokes the process_audio method.
+                The process_audio method combines two main functionalities, namely the live transcription of a phrase and the collection of audio data for the entire song.</p>
+                <pre><code class="language-python">
 # Transcription process
 @app.post("/transcribe")
 def process_audio():
@@ -475,8 +526,7 @@ def process_audio():
                   <div class="implementation-details">
                     <h3>Implementation Details</h3>
                     <div class="code-example">
-                        As shown previously in the 'YouTube Embedding & Lyric Synchronisation' section, function checkMatch() is called once the current lyric is updated.
-                        <br>
+                        <p>As shown previously in the 'YouTube Embedding & Lyric Synchronisation' section, function checkMatch() is called once the current lyric is updated.</p>
                         <pre><code class="language-javascript">
 const checkMatch = async () => {
     try {
@@ -498,7 +548,7 @@ const checkMatch = async () => {
 };
                     </code></pre>
                     <br>
-                    The checkMatch function sends a GET request /match to the backend which initiates the phrase matching process.
+                    <p>The checkMatch function sends a GET request /match to the backend which initiates the phrase matching process.</p>
                     <pre><code class="language-python">
 # FastAPI endpoint to get the current match result
 @app.get("/match")
@@ -546,10 +596,10 @@ def get_match():
     return JSONResponse(content={"match": "no", "similarity": similarity})                       
                 </code></pre>
                 <br>
-                The backend recieves the GET request and pre-processes the lyric to prepare for comparison. The similarity between the recognized text and the current lyric is calculated using SequenceMatcher from the difflib library. The similarity of the previously recognised phrase is also calculated in case of delayed recognition. The function then returns a JSON response with the match status and similarity score. The match status is set to "yes" if the similarity score exceeds the predefined threshold, 
-                otherwise it is set to "no".
+                <p>The backend recieves the GET request and pre-processes the lyric to prepare for comparison. The similarity between the recognized text and the current lyric is calculated using SequenceMatcher from the difflib library. The similarity of the previously recognised phrase is also calculated in case of delayed recognition. The function then returns a JSON response with the match status and similarity score. The match status is set to "yes" if the similarity score exceeds the predefined threshold, 
+                otherwise it is set to "no".</p>
                 <br><br>
-                The frontend awaits a response, and if the match status is "yes", a star animation is displayed, the score is incremented, and the star is hidden after 3 seconds.
+                <p>The frontend awaits a response, and if the match status is "yes", a star animation is displayed, the score is incremented, and the star is hidden after 3 seconds.</p>
                 <pre><code class="language-javascript">
 if (result.match === "yes") {
     setShowStar(true);
@@ -558,10 +608,10 @@ if (result.match === "yes") {
 }
                 </code></pre>
                 <br>
-                The score is incremented by multiplying the similarity score calculated by SequenceMatcher by 100 and rounding it to the nearest integer. The star animation is displayed for 3 seconds to provide feedback to the user.
+                <p>The score is incremented by multiplying the similarity score calculated by SequenceMatcher by 100 and rounding it to the nearest integer. The star animation is displayed for 3 seconds to provide feedback to the user.</p>
 
                 <br><br>
-                Users can change the threshold for similarity to adjust the sensitivity of the matching process. This is done by allowing the users to choose between predefined thresholds by selecting one of the 'AI Difficulty' options in the application.
+                <p>Users can change the threshold for similarity to adjust the sensitivity of the matching process. This is done by allowing the users to choose between predefined thresholds by selecting one of the 'AI Difficulty' options in the application.</p>
                 <pre><code class="language-javascript">
 &lt;Text style={styles.sectionTitle}&gt;AI Difficulty&lt;/Text&gt;
 &lt;ScrollView horizontal&gt;
@@ -574,8 +624,8 @@ if (result.match === "yes") {
             key={label}
             style={({ pressed }) =&gt; [
                 styles.difficultyOption,
-                difficulty === label &amp;&amp; { backgroundColor: color, borderColor: color },
-                pressed &amp;&amp; { backgroundColor: '#e5e5e5' },
+                difficulty === label && { backgroundColor: color, borderColor: color },
+                pressed && { backgroundColor: '#e5e5e5' },
             ]}
             onPress={() =&gt; {
                 setDifficulty(label);
@@ -607,7 +657,7 @@ if (result.match === "yes") {
 &lt;/ScrollView&gt;
                 </code></pre>
                 <br>
-                The difficulty level is set by the user pressing one of the difficulty buttons, the default is medium. When the user presses the button, an API request /change_threshold is sent to the backend.
+                <p>The difficulty level is set by the user pressing one of the difficulty buttons, the default is medium. When the user presses the button, an API request /change_threshold is sent to the backend.</p>
                 <pre><code class = "language-python">
 @app.post("/change_threshold")
 def change_threshold(request: ThresholdLevel):
@@ -626,10 +676,10 @@ def change_threshold(request: ThresholdLevel):
     return JSONResponse(content={"message": f"Threshold changed to {threshold}"}, status_code=200)
                 </code></pre>
                 <br>
-                The POST request is received by the backend and the threshold is updated based on the difficulty level pressed by the user. The thresholds are predefined after testing with different values and are set to 0.2, 0.35, and 0.5 for easy, medium, and hard respectively. Tests were done with students to determine the most suitable thresholds for each difficulty level.
+                <p>The POST request is received by the backend and the threshold is updated based on the difficulty level pressed by the user. The thresholds are predefined after testing with different values and are set to 0.2, 0.35, and 0.5 for easy, medium, and hard respectively. Tests were done with students to determine the most suitable thresholds for each difficulty level.</p>
 
                 <br><br>
-                At the end of the session, when a user completes a song, the microphone is closed and the score as well as final % accuracy is displayed to the user.
+                <p>At the end of the session, when a user completes a song, the microphone is closed and the score as well as final % accuracy is displayed to the user.</p>
                 <pre><code class="language-javascript">
 if (cTime === 'video_end') {
     console.log('Video ended');
@@ -670,8 +720,8 @@ if (cTime === 'video_end') {
 }           
                 </code></pre>
                 <br>
-                The frontend listens for the 'video_end' event, which is triggered when the video ends. The microphone is then closed, and a GET request /final_score is sent to the backend. Once the microphone is closed, 
-                the process loop in the process_audio method is stopped, and the audio collected throughout the session is saved in a wav file.
+                <p>The frontend listens for the 'video_end' event, which is triggered when the video ends. The microphone is then closed, and a GET request /final_score is sent to the backend. Once the microphone is closed, 
+                the process loop in the process_audio method is stopped, and the audio collected throughout the session is saved in a wav file.</p>
                 <pre><code class="language-python">
 @app.get("/final_score")
 def final_score():
@@ -705,28 +755,28 @@ log_song(duration, sum(similarity_over_song) / len(similarity_over_song), simila
 return JSONResponse(content={"final_score": similarity}, status_code=200)
                 </code></pre>
                 <br>
-                This triggers the final_score method in the backend, which calculates the final score by comparing the entire song's lyrics with the recognised audio 
+                <p>This triggers the final_score method in the backend, which calculates the final score by comparing the entire song's lyrics with the recognised audio 
                 from the saved wav file of the entire session. The similarity is calculated using the embedding_similarity_ov function, which
-                computes the cosine similarity between the lyrics and the recognised audio. The frontend is the updated with the evaluation.
+                computes the cosine similarity between the lyrics and the recognised audio. The frontend is the updated with the evaluation.</p>
                 <pre><code class="language-javascript">
 (&lt;View style={styles.overlay}&gt;
 &lt;Text style={{ fontSize: 20, textAlign: 'center' }}&gt;
     Well done for completing the song "{songTitle}"!
 &lt;/Text&gt;
-{score &gt; 0 ? (
+{score > 0 ? (
     &lt;Text style={{ fontSize: 20, textAlign: 'center' }}&gt;
         You won {score} points!
     &lt;/Text&gt;
 ) : null}
-{finalScore &gt; 0 ? (
+{finalScore > 0 ? (
     &lt;Text style={{ fontSize: 20, textAlign: 'center' }}&gt;
         You were {Math.round(finalScore * 100)}% accurate!
     &lt;/Text&gt;
 ) : null}
 &lt;/View&gt;)
-                </pre></code>
+                </code></pre>
                 <br>
-                The final score from live matching and accuracy from semantic matching are displayed to the user, providing feedback on their performance. The user is informed of the points won and the percentage accuracy achieved.
+                <p>The final score from live matching and accuracy from semantic matching are displayed to the user, providing feedback on their performance. The user is informed of the points won and the percentage accuracy achieved.</p>
               </div>
             </div>
           </div>
@@ -751,8 +801,7 @@ return JSONResponse(content={"final_score": similarity}, status_code=200)
                     </p>
                     <h3>Implementation Details</h3>
                     <div class="code-example">
-                        The playlist and song data is stored in a JSON file 'playlists.json', and initially contains pre-curated playlists based on our interactions with the NAS. The JSON structure is as follows:
-                        <br>
+                        <p>The playlist and song data is stored in a JSON file 'playlists.json', and initially contains pre-curated playlists based on our interactions with the NAS. The JSON structure is as follows:</p>
                         <pre><code class="language-json">
 {
     "playlists": [
@@ -776,7 +825,7 @@ return JSONResponse(content={"final_score": similarity}, status_code=200)
 }
                         </code></pre>
                         <br>
-                        Users can select a playlist from the playlists panel in the right hand side. Once the selected playlist is pressed, the switchPlaylist function is called.
+                        <p>Users can select a playlist from the playlists panel in the right hand side. Once the selected playlist is pressed, the switchPlaylist function is called.</p>
                         <pre><code class="language-javascript">
 const switchPlaylist = (playlistName: string) => {
     if (allPlaylistsGetter[playlistName]) {
@@ -790,10 +839,10 @@ const switchPlaylist = (playlistName: string) => {
     }
 }
                     </code></pre>
-                    This takes the playlist name as a parameter and sets the current playlist to the selected playlist.
-                    The user can now select a song from the left hand side panel which displays the songs in the current playlist, and the song is loaded given its YouTube url as shown in the 'YouTube Embedding & Lyric Synchronisation' section.
+                    <p>This takes the playlist name as a parameter and sets the current playlist to the selected playlist.
+                    The user can now select a song from the left hand side panel which displays the songs in the current playlist, and the song is loaded given its YouTube url as shown in the 'YouTube Embedding & Lyric Synchronisation' section.</p>
                     <br><br>
-                    Users can add to the playlist by pasting a YouTube link to the input field at the top of the application.
+                    <p>Users can add to the playlist by pasting a YouTube link to the input field at the top of the application.</p>
                     <pre><code class="language-javascript">
 // if url not in playlist, fetch song title
 if (!title) {
@@ -815,7 +864,7 @@ if (!title) {
 }
                     </code></pre>
                     <br>
-                    If the song is not already in the playlist, the program adds the song to the current playlist in the frontend, and calls the updatePlaylistJson function.
+                    <p>If the song is not already in the playlist, the program adds the song to the current playlist in the frontend, and calls the updatePlaylistJson function.</p>
                     <pre><code class = "language-javascript">
 const updatePlaylistJson = async (playlist : {id: number, name: string, url: string}[]) => {
     try {
@@ -833,7 +882,7 @@ const updatePlaylistJson = async (playlist : {id: number, name: string, url: str
 };
                     </pre></code>
                     <br>
-                    The updatePlaylistJson sends an API request /update_playlist to the backend, sending as a parameter a JSON with the updated playlist objects, as well as the action to be performed in this case update.
+                    <p>The updatePlaylistJson sends an API request /update_playlist to the backend, sending as a parameter a JSON with the updated playlist objects, as well as the action to be performed in this case update.</p>
                     <pre><code class = "language-python">
 # FastAPI endpoint for updating playlist JSON
 @app.post('/update_playlist')
@@ -886,17 +935,17 @@ def update_playlist(playlist: dict):
     return JSONResponse(content={"message": f"{action} completed."}, status_code=200)
                     </code></pre>
                     <br>
-                    The backend method update_playlist is used for all playlist management operations. The method reads the current playlist JSON file, and based on the action parameter, either adds, removes, or updates the playlist. In the case of adding a new song to a playlist, the update action is called, which updates the playlist with the new song to be saved in the JSON file.
-                    Deleting a song from a playlist also triggers the update action, this can be done by the user pressing the red icon next to the song title. 
+                    <p>The backend method update_playlist is used for all playlist management operations. The method reads the current playlist JSON file, and based on the action parameter, either adds, removes, or updates the playlist. In the case of adding a new song to a playlist, the update action is called, which updates the playlist with the new song to be saved in the JSON file.
+                    Deleting a song from a playlist also triggers the update action, this can be done by the user pressing the red icon next to the song title.</p>
                     <br><br>
-                    To delete an entire playlist, the user must press the red icon near the playlist name. 
+                    <p>To delete an entire playlist, the user must press the red icon near the playlist name.</p>
                     <pre><code class="language-javascript">
 &lt;SvgXml xml={deleteSvg} width={20} height={20} style={styles.iconTag} onPress={() => {removePlaylistJson(playlistName, song.name); fetchPlaylists()}}/>
                     </code></pre>
                     <br>
-                    When the icon is pressed, the removePlaylistJson function is called, similar to updatePlaylistJson, but with the action set to remove. This triggers a POST request to the backend update_playlist method with a "remove" action which pops all the songs from the playlist, deletes the playlist, and updates the JSON file.
+                    <p>When the icon is pressed, the removePlaylistJson function is called, similar to updatePlaylistJson, but with the action set to remove. This triggers a POST request to the backend update_playlist method with a "remove" action which pops all the songs from the playlist, deletes the playlist, and updates the JSON file.</p>
                     <br><br>
-                    To create a new playlist, a user must type the playlist name into the input field above the existing playlists and press the icon to the right of the input field.
+                    <p>To create a new playlist, a user must type the playlist name into the input field above the existing playlists and press the icon to the right of the input field.</p>
                     <pre><code class="language-javascript">
 &lt;SvgXml
 xml={createFolderSvg}
@@ -910,7 +959,7 @@ onPress={() => {
 />
                     </code></pre>
                     <br>
-                    This triggers the createPlaylistJson function which is similar to the updatePlaylistJson function, but with the action set to create. This sends a POST request to the backend update_playlist method with a "create" action, which appends the new playlist to the JSON file if it does not already exist.
+                    <p>This triggers the createPlaylistJson function which is similar to the updatePlaylistJson function, but with the action set to create. This sends a POST request to the backend update_playlist method with a "create" action, which appends the new playlist to the JSON file if it does not already exist.</p>
                   </div>
                   </div>
                   <div>
@@ -935,19 +984,19 @@ onPress={() => {
                     </p>
                     <h3>Implementation Details</h3>
                     <div class = "code-example">
-                    One accessibility features is 'Focus Mode', which hides the playlist and song selection panels to allow the user to focus on the lyrics and the video. This is triggered by the user pressing the 'Focus Mode' button.
+                    <p>One accessibility features is 'Focus Mode', which hides the playlist and song selection panels to allow the user to focus on the lyrics and the video. This is triggered by the user pressing the 'Focus Mode' button.</p>
                     <pre><code class="language-javascript">
 &lt;Pressable
 style={({ pressed }) =&gt; [
     styles.focusButton,
-    pressed &amp;&amp; styles.focusButtonPressed,
-    isFocusMode &amp;&amp; styles.focusButtonActive
+    pressed && styles.focusButtonPressed,
+    isFocusMode && styles.focusButtonActive
 ]}
-onPress={() =&gt; setIsFocusMode(!isFocusMode)}
+onPress={() => setIsFocusMode(!isFocusMode)}
 &gt;
                         </code></pre>
                     <br>
-                    Pressing the Focus Mode button sets isFocusMode to true.
+                    <p>Pressing the Focus Mode button sets isFocusMode to true.</p>
                     <pre><code class="language-javascript">
 &lt;View style={styles.fullscreenBackground}&gt;
 {lyricsSettings.background === 'black' ? (
@@ -969,23 +1018,23 @@ onPress={() =&gt; setIsFocusMode(!isFocusMode)}
 &lt;/View&gt;
                     </code></pre>
                     <br>
-                    The video becomes full screen when focus mode is on, hiding all other panels, and the background can be set according to the user's preference. The background, along with other accessibility features, can be set through the settings panel. 
+                    <p>The video becomes full screen when focus mode is on, hiding all other panels, and the background can be set according to the user's preference. The background, along with other accessibility features, can be set through the settings panel.</p>
                     <pre><code class="language-javascript">
 &lt;Pressable
 style={({ pressed }) =&gt; [
     styles.iconButton,
-    pressed &amp;&amp; styles.iconButtonPressed,
+    pressed && styles.iconButtonPressed,
 ]}
-onPress={() =&gt; setShowSettingsModal(true)}
+onPress={() => setShowSettingsModal(true)}
 &gt;
 &lt;SvgXml xml={settingsSvg} width={24} height={24} /&gt;
 &lt;/Pressable&gt;
                     </code></pre>
                     <br>
-                    Pressing the settings icon in the top right hand corner of the applications opens the settings panel. Within the settings panel, users can change the background, font size, font family, font colour, font style, line spacing, and font size.
+                    <p>Pressing the settings icon in the top right hand corner of the applications opens the settings panel. Within the settings panel, users can change the background, font size, font family, font colour, font style, line spacing, and font size.</p>
 
                     <br><br>
-                    For example for font colour:
+                    <p>For example for font colour:</p>
                     <pre><code class="language-javascript">
 &lt;View style={styles.settingBox}&gt;
 &lt;Text style={styles.settingLabel}&gt;Font Color&lt;/Text&gt;
@@ -1008,10 +1057,10 @@ onPress={() =&gt; setShowSettingsModal(true)}
             style={({ pressed }) =&gt; [
                 styles.colorButton,
                 { backgroundColor: color },
-                lyricsSettings.fontColor === color &amp;&amp; styles.colorButtonActive,
-                pressed &amp;&amp; styles.colorButtonPressed,
+                lyricsSettings.fontColor === color && styles.colorButtonActive,
+                pressed && styles.colorButtonPressed,
             ]}
-            onPress={() =&gt; setLyricsSettings({...lyricsSettings, fontColor: color})}
+            onPress={() => setLyricsSettings({...lyricsSettings, fontColor: color})}
         /&gt;
     ))}
                     
@@ -1019,8 +1068,8 @@ onPress={() =&gt; setShowSettingsModal(true)}
 &lt;/View&gt;
                     </code></pre>
                     <br>
-                    This allows users to choose between a wide range of colours based on their needs and preferences. Similar can be done for the features listed previously, including background which will change the background in focus mode accordingly.
-                    Currently available backgrounds include stage, curtain, concert, black, and white.
+                    <p>This allows users to choose between a wide range of colours based on their needs and preferences. Similar can be done for the features listed previously, including background which will change the background in focus mode accordingly.
+                    Currently available backgrounds include stage, curtain, concert, black, and white.</p>
             </div>
           </div>
         </div>
@@ -1047,11 +1096,46 @@ onPress={() =&gt; setShowSettingsModal(true)}
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/prism/prism.js"></script>
-
+  
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <!-- Updated Syntax Highlighting Setup -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Prism for all code blocks
+      document.querySelectorAll('pre code').forEach(function(block) {
+        if (!block.classList.contains('language-javascript') && 
+            !block.classList.contains('language-python') && 
+            !block.classList.contains('language-json')) {
+          // Default to JavaScript if no language is specified
+          block.classList.add('language-javascript');
+        }
+        
+        // Add line-numbers class to parent pre
+        block.parentNode.classList.add('line-numbers');
+        
+        // Escape HTML entities in code blocks to ensure proper rendering
+        if (!block hasAttribute('data-processed')) {
+          block.innerHTML = block.innerHTML
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+          block.setAttribute('data-processed', 'true');
+        }
+      });
+      
+      // Manual highlight all blocks
+      if (typeof Prism !== 'undefined') {
+        Prism.highlightAll();
+      }
+    });
+  </script>
 </body>
 
 </html>
