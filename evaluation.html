@@ -502,7 +502,7 @@
     <!-- Future Work Section -->
     <section id="future-work" class="section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Future Work</h2>
+        <h2>Future of the ReadingStar Project</h2>
         <p>Potential improvements and extensions for the project</p>
       </div>
       <div class="container">
@@ -511,17 +511,105 @@
             <div class="evaluation-content">
               <div class="future-improvements">
                 <h3>Proposed Improvements</h3>
-                <ul class="improvement-list">
-                  <!-- Add future improvements list -->
-                </ul>
+                <div class="improvement-details">
+                  <h4>UI design</h4>
+                  <p>
+                    While our choice of UI framework was made with utmost accessibility and compatibility in mind, React Native’s limitations posed challenges throughout the project. 
+                    Despite our strong UX and ease of use, this was the result of the tireless work of our team to implement plenty of innovative and creative features, all while integrating a Python API into a stubborn front-end framework. 
+                  </p>
+                  <p>
+                    Due to React Native Windows possessing fewer available libraries than its iOS and Android frameworks, this meant we faced issues like the inability to open or close the microphone inside the app, and had to work around this with FastAPI. 
+                    This was just one of many additional efforts we placed on the Python API.
+                  </p>
+                  <p>
+                    Unfortunately, for our project, React Native was one of the only feasible options because we required a responsive, modern, and flexible UI, without sacrificing compatibility. We do note that…
+                  </p>
+                  <h4>Playlist storage and handling</h4>
+                  <p>
+                    Playlists were stored with atomic songs, inside a JSON file, which had fully-functional CRUD operations. However, this meant that the file was not normalised, meaning that you had to duplicate each 
+                    song entry to add it to a new playlist. To improve this limited storage function, we could split the file into two, one storing songs, and the other containing playlist names and entries, similar 
+                    to a database. Therefore, each song would be assigned a unique key and would only need to be referred to by ID to be loaded from a playlist, so no duplicated entries are required. 
+                  </p>
+                  <p>
+                    Moreover, a song’s YouTube URL is not shown to the user if loaded from a pre-saved playlist, which means that it is difficult to 
+                    add a song already stored to a new playlist. To solve this, we could take a different approach by adding a trivial function 
+                    (maybe presented as a checkbox in settings or near the URL input bar) to show it, if a user so wished.
+                  </p><br>
+                </div>
               </div>
 
               <div class="extension-possibilities mt-4">
                 <h3>Extension Possibilities</h3>
                 <div class="extension-details">
-                  <!-- Add extension possibilities content -->
+                  <h4>Additional performance feedback</h4>
+                  <p>
+                    Our final score provides very accurate feedback on the singing performance of a user. 
+                    In the future, we could expand on this by providing more detail on the accuracy per lyric. 
+                    This is already stored after the Whisper model transcription. Thus, we may once again use a 
+                    sequence matcher to highlight the best and worst speech of the song, and present them in the 
+                    application, using appropriate colour grading. This would allow educators and students alike 
+                    to identify the most difficult pronunciations, which would aid future speech practice.
+                  </p>
+                  <h4>Automatic difficulty classification by song</h4>
+                  <b><em>Note this differs to the difficulty selector already featured in-game, and would not replace it, rather complement it.</em></b><br>
+                  <p>
+                    Throughout the course of our project, and underscored in our user acceptance testing phase, we 
+                    noticed the range in difficulty of songs played. Slower songs, such as nursery rhymes, were 
+                    easier to perform than high-tempo songs, such as those featured on Disney soundtracks. 
+                  </p>
+                  <p>
+                    One way to improve UX when performing is to calculate the speed of the song upon receipt of the 
+                    lyrics, using a measure such as the average of lyric length / lyric interval. Then, we would 
+                    compare this to a preset threshold which would automatically classify the song in categories 
+                    such as starter, challenging, or ultimate difficulty. This would be presented to the user at 
+                    a suitable point, such as before playing the song or next to the score graphic. It would 
+                    provide the user an additional opportunity to select a suitable threshold for the in-game 
+                    difficulty scoring threshold.
+                  </p>
+                  <h4>Leaderboard, and Multiplayer Versus Mode</h4>
+                  <p>
+                    A locally-stored leaderboard would provide additional competitive incentive when practising 
+                    with the game. We could add an arcade-style leaderboard in a JSON file, where the top 5 
+                    performances per song and difficulty are scored, and the player is prompted to add theirs if 
+                    high enough. This would be a great way to encourage replayability and competition amongst the
+                    individual using ReadingStar.
+                  </p>
+                  <p>
+                    Additionally, a heavily-requested feature from our visit to the Helen Allison School was a 
+                    multiplayer mode, where users could compete with each other on who sings the most accurately. 
+                    This could be implemented with a multiple-microphone setup, and modifications to the back-end 
+                    to record multiple performances concurrently. We would only need the existing model pipeline 
+                    for transcription, as it already processes vocal input into transcribed data and could 
+                    incorporate multiple inputs into its queue. A shared results screen at the end of each session 
+                    could highlight individual performances and declare a winner based on overall accuracy. One 
+                    point of note is that further noise reduction techniques may be necessary, particularly in 
+                    environments with multiple audio sources, such as a noisy classroom.
+                  </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conclusion -->
+    <section id="conclusion" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Conclusion</h2>
+        <p>Final thoughts on the project</p>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <div class="conclusion">
+              <p>
+                Overall, we can undoubtedly classify our project work as a success, as we hit all objectives set out and extended on multiple, 
+                and the application is nearing a stable release to the Microsoft Store. Most importantly though, feedback from users, 
+                especially at the Helen Allison School, one of the institutions most invested in the app’s development, was overwhelmingly positive. 
+                Anthony and Jerry had the wonderful opportunity to see the children, who will be using this, having fun performing songs with ReadingStar, 
+                and we hope this is the seed for a revolution in accessible speech therapy.
+              </p>
             </div>
           </div>
         </div>
