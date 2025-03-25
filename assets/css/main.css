@@ -309,7 +309,8 @@ h6 {
     display: block;
     position: absolute;
     visibility: hidden;
-    left: 14px;
+    left: auto;
+    right: 0;
     top: 130%;
     opacity: 0;
     transition: 0.3s;
@@ -448,7 +449,7 @@ h6 {
     position: static;
     display: none;
     z-index: 99;
-    padding: 10px 0;
+    padding: 10px 10px;
     margin: 10px 20px;
     background-color: var(--nav-dropdown-background-color);
     border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
