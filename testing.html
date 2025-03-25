@@ -79,9 +79,9 @@
                 <h4>Testing Phases</h4>
                   <p>There were three main phases of testing:</p>
                   <ul class="feature-list">
-                    <li><strong>Unit and performance testing:</strong> Does the application do what it is expected to do, and in a reasonable time?</li>
-                    <li><strong>Integration testing:</strong> Do different components of the application cooperate with each other effectively and efficiently?</li>
-                    <li><strong>User acceptance testing:</strong> Is the application’s user experience (UX) satisfactory for the context of the user and the action being performed?</li>
+                    <li><b>Unit and performance testing:</b> Does the application do what it is expected to do, and in a reasonable time?</li>
+                    <li><b>Integration testing:</b> Do different components of the application cooperate with each other effectively and efficiently?</li>
+                    <li><b>User acceptance testing:</b> Is the application’s user experience (UX) satisfactory for the context of the user and the action being performed?</li>
                   </ul>
               </div>
             </div>
@@ -218,6 +218,7 @@
             <div class="testing-content">
               <div class="test-category">
                 <h3>Performance Testing and Analysis</h3>
+                <h4>Base performance testing</h4>
                 <div class="test-details">
                   <p>We analysed the inference time of the Whisper model on 500 .WAV tracks, with length between 30 seconds and 5 minutes, with and without Intel’s OpenVINO inference pipeline, on an average Windows laptop CPU.</p>
                   <p>The CPU specs:</p>
@@ -229,11 +230,83 @@
                   <p><b>Note:</b> the CPU usage before the model was run in either case sat at overheads of ~28%.</p>
                   <div class="text-center mb-4">
                     <figure>
-                      <img src="assets/img/evaluation/openvino-cpu.png" alt=" OpenVINO™ vs non-OpenVINO™ average CPU usage during model inference" class="img-fluid rounded" style="max-width: 80%;">
-                      <figcaption class="mt-2">Figure 1: OpenVINO™ vs non-OpenVINO™ average CPU usage during model inference</figcaption>
+                      <img src="assets/img/evaluation/openvino-cpu.png" alt="OpenVINO™ vs non-OpenVINO™ average CPU usage during model inference" class="img-fluid rounded" style="max-width: 80%;">
+                      <figcaption class="mt-2">Figure 1: OpenVINO vs non-OpenVINO average CPU usage during model inference</figcaption>
                     </figure>
                   </div>
+                  <div class="text-center mb-4">
+                    <figure>
+                      <img src="assets/img/evaluation/openvino-power.png" alt="OpenVINO™ vs non-OpenVINO™ average power consumption against track length" class="img-fluid rounded" style="max-width: 80%;">
+                      <figcaption class="mt-2">Figure 2: OpenVINO vs non-OpenVINO average power consumption against track length</figcaption>
+                    </figure>
+                  </div>
+                  <p>As shown by the first figure, without the OpenVINO pipeline, performance is deprecated, because there is nothing to optimise the Whisper model when transcription. This would make its use without the pipeline intractable for the speeds required for near-instant feedback.</p>
+                  <p>Furthermore, analysis of power usage in complete inference, from the second figure, further asserts how crucial OpenVINO is for exceptional performance in ReadingStar. On average, it uses 5.5x less energy while producing output in the exact same time as a non-OpenVINO model.</p>
                 </div>
+                <h4>Hardware testing</h4>
+                <div class="test-details">
+                  <p>For hardware testing, we compared the performance of ReadingStar on a range of devices to understand how the application behaves on different hardware configurations.</p>
+                  <p>The OpenVINO pipeline can optimise genAI processes on either the native CPU, GPU, or, if available, the NPU (neural processing unit). We tested OpenVINO on the ​​Intel® Core™ Ultra 5 Processor 125H, which contains three devices:</p>
+                  <ul class="feature-list">
+                    <li>Intel Core Ultra 5 Processor 125H CPU (14-core, 4.50 GHz)</li>
+                    <li>Intel Arc Graphics GPU</li>
+                    <li>Intel AI Boost NPU</li>
+                  </ul>
+                  <p>The following graph illustrates the total package power consumption when using different inference devices over a complete session in the ReadingStar application. In all cases, the majority of the power consumption is done by the CPU, as it is responsible for running the application. The key difference lies in the additional power consumed during inference, depending on the device used. </p>
+                  <div class="text-center mb-4">
+                    <figure>
+                      <img src="assets/img/evaluation/openvino-devices.png" alt="Utilised power of Intel Core Ultra 5 Processor 125H CPU, Intel Arc Graphics GPU, Intel AI Boost NPU when running OpenVINO-pipelined inference models" class="img-fluid rounded" style="max-width: 90%;">
+                      <figcaption class="mt-2">Figure 3: Utilised power of given CPU, GPU, NPU when running OpenVINO-pipelined inference models</figcaption>
+                    </figure>
+                  </div>
+                  <p>Comparing the CPU and NPU utilised graphs, the peaks of package power are considerably higher when not utilising the NPU; the maximum power consumption when utilising CPU is 32.28 W in comparison to 21.46 W when using the NPU for inference. Additionally, the power consumption when utilising CPU for inference is much more erratic, this is because during batches of live transcription, the computer is using CPU for automatic speech recognition inference, which leads to frequent fluctuations in power usage. These fluctuations are still visible when using the NPU for the batch inference, but as the NPU is much more efficient for AI inference, the variations are much smaller and more stable.</p>
+                  <p>As for the GPU graph, its power consumption shows even greater fluctuations than the CPU. This is expected, as GPUs are designed for training rather than inference, making their power consumption highly variable when carrying out the batch inference in the application session. The GPU has a max of 32.07W, similar to CPU, but the batch inference fluctuations are unstable and less consistent as the GPU attempts to optimise through parallel processing and high-throughput workloads.</p>
+                </div>
+
+                <h5>Overall Energy Impact</h5>
+                <p>The song used for testing power consumption is “Humpty Dumpty” by Super Simple Songs, and has a length of 1 minute, 19 seconds. <br>Taking Energy (Wh) = Power (W) × Time (h) and assuming a battery capacity of 50Wh as standard for most standard-spec 2020s laptops, we can subsequently use the formula for energy to estimate the battery life savings as a result of NPU-efficient inference when running the ReadingStar app:</p>
+                <p></p>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Processing Unit</th>
+                      <th>Power Consumption (W)</th>
+                      <th>Energy per Song (Wh/song)</th>
+                      <th>Songs per Full Laptop Battery Charge</th>
+                      <th>Battery Life Saved (Hours)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Intel Core Ultra 5 Processor 125H CPU</td>
+                      <td>11.10 W</td>
+                      <td>0.244 Wh/song</td>
+                      <td>205 songs</td>
+                      <td>4.5 hours</td>
+                    </tr>
+                    <tr>
+                      <td>Intel Arc Graphics GPU</td>
+                      <td>14.42 W</td>
+                      <td>0.316 Wh/song</td>
+                      <td>158 songs</td>
+                      <td>3.5 hours</td>
+                    </tr>
+                    <tr>
+                      <td>Intel AI Boost NPU</td>
+                      <td><b>9.33 W</b></td>
+                      <td><b>0.205 Wh/song</b></td>
+                      <td><b>244 songs</b></td>
+                      <td><b>5.4 hours</b></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>
+                  This gives <b>approximately 20% extended battery life</b> when running Reading Star <b>with an NPU for inference over a CPU</b> and a <b>54% extended battery life over a GPU</b>.
+                </p>
+                
+                <p>
+                  In conclusion, using a device with an NPU when running AI-powered applications like Reading Star leads to significant battery life and efficiency improvements at no additional cost to speed, totaling to almost an extra hour of playtime in our tests over a CPU, and 2 hours over a GPU.
+                </p>
               </div>
             </div>
           </div>
