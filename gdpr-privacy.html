@@ -24,6 +24,48 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <style>
+  .license-content table {
+      width: 100%;
+      margin-bottom: 20px;
+      border-collapse: collapse;
+      table-layout: fixed;
+  }
+  .license-content th, .license-content td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+      width: 33.33%;
+  }
+  .license-content th {
+      background-color: #6596ca; /* Darker shade of blue */
+      color: white;
+      font-weight: bold;
+  }
+  .license-content tr:nth-child(even) {
+      background-color: #f8f9fa;
+  }
+  .license-content tr:hover {
+      background-color: #e9ecef;
+  }
+  .compliance-summary, .license-verification {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #e3f2fd;
+      border-left: 5px solid #007bff;
+      border-radius: 5px;
+      font-size: 16px;
+  }
+  .license-content a {
+      color: #0056b3;
+      font-weight: bold;
+      text-decoration: none;
+  }
+  .license-content a:hover {
+      text-decoration: underline;
+      color: #003366;
+  }
+  </style>
 </head>
 
 <body>
@@ -47,7 +89,7 @@
           <li class="dropdown"><a href="#" class="active"><span>Appendices</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="user-manual.html">User & Deployment Manual</a></li>
-              <li><a href="gdpr-privacy.html" class="active">GDPR and Privacy of Data</a></li>
+              <li><a href="gdpr-privacy.html" class="active">Legal Statement and GDPR</a></li>
               <li><a href="development-blog.html">Development Blog</a></li>
               <li><a href="monthly-video.html">Monthly Video</a></li>
             </ul>
@@ -63,7 +105,7 @@
     <!-- GDPR Overview Section -->
     <section id="gdpr-overview" class="section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>GDPR Compliance</h2>
+        <h2>GDPR</h2>
         <p>How ReadingStar ensures compliance with GDPR regulations</p>
       </div>
       <div class="container">
@@ -71,18 +113,24 @@
           <div class="col-lg-12" data-aos="fade-up">
             <div class="gdpr-content">
               <h3>Overview</h3>
-              <p>ReadingStar is committed to protecting user privacy and ensuring compliance with the General Data Protection Regulation (GDPR). This section outlines our approach to data protection and privacy.</p>
+              <p>ReadingStar complies with GDPR by ensuring that all processed user data is handled accordingly. The only personal data collected by the application is audio recordings of the user's voice. This data is collected for the purpose of speech analysis and feedback, under the legal basis of legitimate interest.
+                During the collection of audio in real-time, the audio data is added to a queue and immediately cleared once it is processed. Similarly, during the collection of a wav file recording for the session, the wav file is deleted immediately after processing. Hence, no data is stored persistently in the application and all personal data collected through audio is cleared once processed. 
+                <br><br>
+                Additionally, AI processing is done locally on the user's device such that no data is sent to external servers.
+                By implementing these measures, and not 
+                storing any identifiable personal data, ReadingStar ensures that user privacy is maintained and GDPR regulations are adhered to.</p>
+            </p>
 
               <!-- Data Processing Principles -->
               <div class="principles mt-4">
                 <h3>Data Processing Principles</h3>
                 <ul class="feature-list">
                   <li><i class="bi bi-shield-check"></i> <strong>Lawfulness, Fairness, and Transparency:</strong> We process data legally and transparently</li>
-                  <li><i class="bi bi-shield-check"></i> <strong>Purpose Limitation:</strong> Data is collected for specified, explicit purposes</li>
-                  <li><i class="bi bi-shield-check"></i> <strong>Data Minimization:</strong> Only necessary data is collected</li>
+                  <li><i class="bi bi-shield-check"></i> <strong>Purpose Limitation:</strong> Data is collected under legitimate interest for speech development</li>
+                  <li><i class="bi bi-shield-check"></i> <strong>Data Minimization:</strong> Only necessary data is collected, i.e. the audio recordings with no attached metadata identifying the user</li>
                   <li><i class="bi bi-shield-check"></i> <strong>Accuracy:</strong> Data is kept accurate and up to date</li>
-                  <li><i class="bi bi-shield-check"></i> <strong>Storage Limitation:</strong> Data is kept only as long as necessary</li>
-                  <li><i class="bi bi-shield-check"></i> <strong>Integrity and Confidentiality:</strong> Data is processed securely</li>
+                  <li><i class="bi bi-shield-check"></i> <strong>Storage Limitation:</strong> Data is kept only as long as necessary, and immediately deleted once the audio is processed for feedback</li>
+                  <li><i class="bi bi-shield-check"></i> <strong>Integrity and Confidentiality:</strong> Data is processed securely and locally on the user's device</li>
                 </ul>
               </div>
             </div>
@@ -91,137 +139,131 @@
       </div>
     </section>
 
-    <!-- Data Collection Section -->
-    <section id="data-collection" class="section">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Data Collection and Processing</h2>
-        <p>Understanding what data we collect and how we use it</p>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12" data-aos="fade-up">
-            <div class="data-content">
-              <!-- Types of Data -->
-              <div class="data-types">
-                <h3>Types of Data Collected</h3>
-                <div class="table-responsive">
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Data Category</th>
-                        <th>Purpose</th>
-                        <th>Legal Basis</th>
-                        <th>Retention Period</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Personal Information</td>
-                        <td>User identification and account management</td>
-                        <td>Consent</td>
-                        <td>Duration of account + 30 days</td>
-                      </tr>
-                      <tr>
-                        <td>Reading Performance Data</td>
-                        <td>Progress tracking and improvement analysis</td>
-                        <td>Legitimate Interest</td>
-                        <td>Duration of account</td>
-                      </tr>
-                      <tr>
-                        <td>Voice Recordings</td>
-                        <td>Speech analysis and feedback</td>
-                        <td>Consent</td>
-                        <td>24 hours</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              <!-- Data Processing -->
-              <div class="data-processing mt-4">
-                <h3>Data Processing Activities</h3>
-                <ul class="feature-list">
-                  <li><i class="bi bi-arrow-right-circle"></i> User registration and authentication</li>
-                  <li><i class="bi bi-arrow-right-circle"></i> Reading progress analysis</li>
-                  <li><i class="bi bi-arrow-right-circle"></i> Speech recognition and processing</li>
-                  <li><i class="bi bi-arrow-right-circle"></i> Performance reporting</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+    <!-- Source Code License Section -->
+    <section id="license" class="section light-background">
+        <div class="container section-title" data-aos="fade-up">
+            <h2>External Libraries</h2>
+            <p>Licensing information for external libraries used in our project</p>
         </div>
-      </div>
-    </section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12" data-aos="fade-up">
+                    <div class="license-content">
+                        <h3>Backend Libraries Licensing</h3>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Library</th>
+                                    <th>License</th>
+                                    <th>Commercial Use</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FastAPI</td>
+                                    <td><a href="https://github.com/tiangolo/fastapi/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>Pydantic</td>
+                                    <td><a href="https://github.com/pydantic/pydantic/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>NumPy</td>
+                                    <td><a href="https://github.com/numpy/numpy/blob/main/LICENSE.txt" target="_blank" rel="noopener noreferrer">BSD 3-Clause</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>OpenVINO GenAI</td>
+                                    <td><a href="https://github.com/openvinotoolkit/openvino_genai/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Apache License 2.0</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>SpeechRecognition</td>
+                                    <td><a href="https://github.com/Uberi/speech_recognition/blob/master/LICENSE.txt" target="_blank" rel="noopener noreferrer">BSD 3-Clause</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>Uvicorn</td>
+                                    <td><a href="https://github.com/encode/uvicorn/blob/master/LICENSE.md" target="_blank" rel="noopener noreferrer">BSD 3-Clause</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>Optimum Intel OpenVINO</td>
+                                    <td><a href="https://github.com/huggingface/optimum-intel/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Apache License 2.0</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>Transformers</td>
+                                    <td><a href="https://github.com/huggingface/transformers/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Apache License 2.0</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>Scikit-learn</td>
+                                    <td><a href="https://github.com/scikit-learn/scikit-learn/blob/main/COPYING" target="_blank" rel="noopener noreferrer">BSD 3-Clause</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>Torch (PyTorch)</td>
+                                    <td><a href="https://github.com/pytorch/pytorch/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">BSD 3-Clause</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-    <!-- User Rights Section -->
-    <section id="user-rights" class="section light-background">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>User Rights</h2>
-        <p>Understanding your rights under GDPR</p>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12" data-aos="fade-up">
-            <div class="rights-content">
-              <div class="rights-list">
-                <div class="right-item">
-                  <h3><i class="bi bi-person-check"></i> Right to Access</h3>
-                  <p>Users can request access to their personal data and receive information about how it is processed.</p>
-                </div>
+                        <h3>Frontend Libraries Licensing</h3>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Library</th>
+                                    <th>License</th>
+                                    <th>Commercial Use</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>React</td>
+                                    <td><a href="https://github.com/facebook/react/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>React Native</td>
+                                    <td><a href="https://github.com/facebook/react-native/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>React Native WebView</td>
+                                    <td><a href="https://github.com/react-native-webview/react-native-webview/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>React Native SVG</td>
+                                    <td><a href="https://github.com/react-native-svg/react-native-svg/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>react-native-xml2js</td>
+                                    <td><a href="https://www.npmjs.com/package/react-native-xml2js" target="_blank" rel="noopener noreferrer">MIT License</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                                <tr>
+                                    <td>he</td>
+                                    <td><a href="https://www.npmjs.com/package/he" target="_blank" rel="noopener noreferrer">MIT License</a></td>
+                                    <td>✅ Permitted</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                <div class="right-item mt-4">
-                  <h3><i class="bi bi-pencil-square"></i> Right to Rectification</h3>
-                  <p>Users can request corrections to inaccurate personal data.</p>
+                        <div>
+                            <h4>Compliance Summary</h4>
+                            <p><i class="bi bi-shield-check"></i>  All externel libraries used in this project are available for commercial use.</p>
+                            <p><i class="bi bi-shield-check"></i>  All libraries are licensed as open-source (MIT, BSD 3-Clause, Apache 2.0).</p>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="right-item mt-4">
-                  <h3><i class="bi bi-trash"></i> Right to Erasure</h3>
-                  <p>Users can request deletion of their personal data under certain circumstances.</p>
-                </div>
-
-                <div class="right-item mt-4">
-                  <h3><i class="bi bi-download"></i> Right to Data Portability</h3>
-                  <p>Users can request their data in a structured, commonly used format.</p>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Security Measures Section -->
-    <section id="security" class="section">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Security Measures</h2>
-        <p>How we protect your data</p>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12" data-aos="fade-up">
-            <div class="security-content">
-              <div class="security-measures">
-                <h3>Technical Measures</h3>
-                <ul class="feature-list">
-                  <li><i class="bi bi-lock"></i> End-to-end encryption for data transmission</li>
-                  <li><i class="bi bi-lock"></i> Secure data storage with encryption at rest</li>
-                  <li><i class="bi bi-lock"></i> Regular security audits and penetration testing</li>
-                  <li><i class="bi bi-lock"></i> Access control and authentication mechanisms</li>
-                </ul>
-
-                <h3 class="mt-4">Organizational Measures</h3>
-                <ul class="feature-list">
-                  <li><i class="bi bi-shield"></i> Staff training on data protection</li>
-                  <li><i class="bi bi-shield"></i> Data protection impact assessments</li>
-                  <li><i class="bi bi-shield"></i> Incident response procedures</li>
-                  <li><i class="bi bi-shield"></i> Regular policy reviews and updates</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Source Code License Section -->
@@ -235,17 +277,7 @@
           <div class="col-lg-12" data-aos="fade-up">
             <div class="license-content">
               <h3>License Terms</h3>
-              <p>ReadingStar is licensed under [License Type] as agreed with our project partners. The full license terms can be found in our repository.</p>
-
-              <div class="license-details mt-4">
-                <h4>Key Points</h4>
-                <ul class="feature-list">
-                  <li><i class="bi bi-check2"></i> Usage restrictions</li>
-                  <li><i class="bi bi-check2"></i> Distribution terms</li>
-                  <li><i class="bi bi-check2"></i> Attribution requirements</li>
-                  <li><i class="bi bi-check2"></i> Liability disclaimers</li>
-                </ul>
-              </div>
+              <p>ReadingStar is a closed source freeware application developed under University College London. Therefore, while the application is available for use, its internal workings including the source code and AI processing mechanisms are not publicly accessible.</p>
             </div>
           </div>
         </div>
