@@ -178,17 +178,12 @@
                       </tr>
                     </tbody>
                   </table>
-                  <h4>Tools Used</h4>
-                  <ul class="feature-list">
-                    <li><i class="bi bi-tools"></i> Jest for JavaScript testing</li>
-                    <li><i class="bi bi-tools"></i> PyTest for Python components</li>
-                  </ul>
                   
-                  <h4>Test Coverage</h4>
+                  <!--<h4>Test Coverage</h4>
                   <div class="coverage-stats">
                     <p>Overall code coverage: 85%</p>
-                    <!-- Add coverage chart or detailed stats here -->
-                  </div>
+                     Add coverage chart or detailed stats here 
+                  </div>-->
                 </div>
               </div>
 
@@ -212,18 +207,33 @@
     </section>
 
     <!-- Compatibility Testing Section -->
-    <section id="compatibility" class="section light-background">
+    <section id="performance" class="section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Compatibility Testing</h2>
-        <p>Testing across different platforms and environments</p>
+        <h2>Performance Testing</h2>
+        <p>Power usage testing and performance optimization results</p>
       </div>
       <div class="container">
         <div class="row">
           <div class="col-lg-12" data-aos="fade-up">
             <div class="testing-content">
-              <h3 class="mt-4">Device Compatibility</h3>
-              <div class="device-testing">
-                <!-- Add device testing results here -->
+              <div class="test-category">
+                <h3>Performance Testing and Analysis</h3>
+                <div class="test-details">
+                  <p>We analysed the inference time of the Whisper model on 500 .WAV tracks, with length between 30 seconds and 5 minutes, with and without Intel’s OpenVINO inference pipeline, on an average Windows laptop CPU.</p>
+                  <p>The CPU specs:</p>
+                  <ul class="feature-list">
+                    <li>Intel Core i5-12450H</li>
+                    <li>16GB RAM</li>
+                    <li>8 cores, 2.00 GHz clock speed</li>
+                  </ul>
+                  <p><b>Note:</b> the CPU usage before the model was run in either case sat at overheads of ~28%.</p>
+                  <div class="text-center mb-4">
+                    <figure>
+                      <img src="assets/img/evaluation/openvino-cpu.png" alt=" OpenVINO™ vs non-OpenVINO™ average CPU usage during model inference" class="img-fluid rounded" style="max-width: 80%;">
+                      <figcaption class="mt-2">Figure 1: OpenVINO™ vs non-OpenVINO™ average CPU usage during model inference</figcaption>
+                    </figure>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
