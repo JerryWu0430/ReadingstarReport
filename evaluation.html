@@ -231,15 +231,15 @@
                         <td>UI Design</td>
                         <td>10%</td>
                         <td>20%</td>
-                        <td>30%</td>
-                        <td>40%</td>
+                        <td>25%</td>
+                        <td>45%</td>
                       </tr>
                       <tr>
                         <td>Coding</td>
                         <td>30%</td>
                         <td>30%</td>
-                        <td>20%</td>
-                        <td>20%</td>
+                        <td>25%</td>
+                        <td>15%</td>
                       </tr>
                       <tr>
                         <td>Testing</td>
@@ -398,10 +398,14 @@
           <div class="col-lg-12" data-aos="fade-up">
             <div class="evaluation-content">
               <!-- UI/UX Evaluation -->
-              <div class="evaluation-category">
-                <h3>User Interface / User Experience</h3>
+              <div class="evaluation-category" data-aos="fade-up">
+                <h3 >User Interface / User Experience</h3>
                 <div class="evaluation-details">
-                  <!-- Add UI/UX evaluation content -->
+                  <p>
+                    Our app provides a smooth and streamlined user experience, and we believe that we have achieved our goal of an exciting, accessible game. At its very base, React Native has allowed us to build an intuitive and responsive application. 
+                    On the main game screen, the use of bright colours, big buttons, all while conforming to familiar app layouts, means players need just one click to begin singing. Meanwhile, our focus mode and theme selector for performances takes gameplay 
+                    to a completely new level, allowing players to completely lock into their performanceWe also have settings available to adjust features like fonts, and their sizing, colours, and more, and the scoring visibility can be toggled at any moment.
+                  </p>
                 </div>
               </div>
 
@@ -429,7 +433,30 @@
               <div class="evaluation-category mt-4">
                 <h3>Efficiency</h3>
                 <div class="evaluation-details">
-                  <!-- Add efficiency evaluation content -->
+                  <p>For our project, additional efficiency was provided by Intel’s OpenVINO inference pipeline. As demonstrated in the performance testing section, OpenVINO provides optimised performance at no cost to speed, and thus uses less power as a result. This is critical for users, especially on laptops, who can still run the model at great speed without having to worry about excessive power usage.</p>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Tested Option</th>
+                        <th>Average Total Power Draw per Session (W)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>CPU utilised</td>
+                        <td>11.10419456</td>
+                      </tr>
+                      <tr>
+                        <td>GPU utilised</td>
+                        <td>14.42176254</td>
+                      </tr>
+                      <tr>
+                        <td>NPU utilised</td>
+                        <td>9.326389253</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p>ReadingStar aims for low latency inference for real time ASR, making the NPU the most suitable inference device. This is because the NPU excels at low-latency and energy efficient inference whereas the GPU is optimised for parallel, high-throughput tasks, which is more suitable for training and less ideal for real time inference tasks.</p>
                 </div>
               </div>
 
@@ -453,8 +480,18 @@
               <div class="evaluation-category mt-4">
                 <h3>Project Management</h3>
                 <div class="evaluation-details">
-                  <!-- Add project management evaluation content -->
-                </div>
+                  <p>
+                    Throughout the course of our project, our team was very interactive over every channel. Outside of the lab sessions which we all maintained consistent attendance to, we would plan and discuss the execution of solutions over our WhatsApp group chat, 
+                    and by logging our progress on GitHub with issues, descriptive commits, and thorough code reviews.
+                  </p>
+                  <p>
+                    Through all these media, we would delegate or share responsibilities for upcoming tasks, holding each other accountable and working quickly to maintain 
+                    steady progress. In addition, our team was very flexible in terms of roles, with each member contributing to all aspects of the project. This was particularly useful when one member was struggling with a task, as another could step in and provide assistance. 
+                  </p>
+                  <p>
+                    Our agile approach as the requirements evolved, from feedback at the BETT Conference to the comments of pupils at the Helen Allison School, was kept streamlined through receptive communication on the WhatsApp group chat again. We 
+                    also made sure to check off objectives at regular points in development, and keep the Gantt chart updated.
+                  </p>
               </div>
             </div>
           </div>
