@@ -251,7 +251,11 @@
               <div class="evaluation-category mt-4">
                 <h3>Functionality</h3>
                 <div class="evaluation-details">
-                  <!-- Add functionality evaluation content -->
+                  <p>Our aim was to provide an application which allowed users of any demographic to easily improve their speech by performing karaoke with their desired song, providing real-time feedback and rewards based on similarity. We achieved this, and managed to build on this with further analysis on the recording of their voice during the song to finally score their overall performance.</p>
+
+                  <p>The Whisper model we utilised for transcription and analysis in this project is world-leading in terms of performance and WER, when standardized for all demographics, but unfortunately its limitations for live ASR emerged in this project.</p>
+
+                  <p>One point of note was its occasional inaccuracy for medium-length or incomplete phrases. Due to this, perfectly valid speech to the human ear would not be deemed similar enough to the lyric in real-time, and subsequently not be awarded in-game points. This is because the model adapts transcriptions based on the surrounding context, which it is starved of in the short window for the lyric matching (no more than a few seconds). Therefore, the final accuracy score presented at the end of a song is always the better (and correct) performance assessment, compared to the points score.</p>
                 </div>
               </div>
 
@@ -259,7 +263,7 @@
               <div class="evaluation-category mt-4">
                 <h3>Stability</h3>
                 <div class="evaluation-details">
-                  <!-- Add stability evaluation content -->
+                  <p>The project as a whole is now very stable, though at times during development it demonstrated quite volatile behaviour. For example, developing a React Native front-end for Windows suffers from a limited range of libraries which required us to find tricky workarounds for seemingly simple tasks, such as microphone access. Furthermore, the app was prone to crashes in the early stages of UI development, usually due to errors such as failed library imports or buttons disappearing at runtime, despite being present in the code. However, as we became familiar with the platform, these spontaneous errors decreased in frequency and we are very confident that the current application is robust enough to handle a vast range of events.</p>
                 </div>
               </div>
 
