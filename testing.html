@@ -73,6 +73,8 @@
               <h3>Overview</h3>
               <p>Our testing strategy follows a comprehensive approach that includes various testing levels and methodologies to ensure the quality and reliability of ReadingStar.</p>
               
+              <p>An iterative testing approach was utilised across the development of the project. While most use cases are quite intuitive, we ensured to cover the breadth of possibilities that our program could face, in everything from vocal input to the hidden API calls.</p>
+
               <div class="testing-phases mt-4">
                 <h4>Testing Phases</h4>
                 <ul class="feature-list">
@@ -101,6 +103,80 @@
               <div class="test-category">
                 <h3>Unit Testing</h3>
                 <div class="test-details">
+                  <p>We began unit testing with tests for all endpoints of the backend API in the file api_test.py. They were performed with the instruction <code>python -m unittest api_test.py</code>.</p>
+                  <h4>API unit testing</h4>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Test case</th>
+                        <th>Assertions</th>
+                        <th>Outcome</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Final score generation from a .WAV recording, with a mocked OpenVINO pipeline</td>
+                        <td>Score response OK’d (code 200)<br>Key ‘final_score’ present in the API response JSON<br>final_score ≈ 0.85</td>
+                        <td>Pass</td>
+                      </tr>
+                      <tr>
+                          <td>2</td>
+                          <td>Getting playlists from the JSON</td>
+                          <td>Get request OK’d<br>Key ‘playlists’ present in the API response JSON</td>
+                          <td>Pass</td>
+                      </tr>
+                      <tr>
+                          <td>3</td>
+                          <td>Updating playlist</td>
+                          <td>Post request OK’d<br>Key ‘message’ = ‘update completed.’<br>New song in the playlist JSON</td>
+                          <td>Pass</td>
+                      </tr>
+                      <tr>
+                          <td>4</td>
+                          <td>Remove a song from the playlist</td>
+                          <td>Post request OK’d<br>Key ‘message’ = ‘remove completed.’<br>Song no longer present in playlist JSON</td>
+                          <td>Pass</td>
+                      </tr>
+                      <tr>
+                          <td>5</td>
+                          <td>Delete a playlist</td>
+                          <td>Post request OK’d<br>Key ‘message’ = ‘remove completed.’<br>Playlist no longer present in JSON</td>
+                          <td>Pass</td>
+                      </tr>
+                      <tr>
+                          <td>6</td>
+                          <td>Updating live lyric</td>
+                          <td>Post request OK’d<br>Key ‘message’ present<br>The new lyric present in JSON</td>
+                          <td>Pass</td>
+                      </tr>
+                      <tr>
+                          <td>7</td>
+                          <td>Sending full lyrics to app</td>
+                          <td>Post request OK’d<br>Confirmation of lyrics receipt</td>
+                          <td>Pass</td>
+                      </tr>
+                      <tr>
+                          <td>8</td>
+                          <td>Getting the live match score</td>
+                          <td>Get request OK’d<br>Similarity = 0.6<br>No lyric match (test threshold is 0.7)</td>
+                          <td>Pass</td>
+                      </tr>
+                      <tr>
+                          <td>9</td>
+                          <td>Microphone switch-off</td>
+                          <td>Get request OK’d<br>Confirmation of microphone switch-off</td>
+                          <td>Pass</td>
+                      </tr>
+                      <tr>
+                          <td>10</td>
+                          <td>Embedding_similarity_ov function</td>
+                          <td>Tokenizer result ≈ 0.9<br>Tokenizer was called just once<br>Model was called just once<br>Normalizer was called just once<br>Cosine was called just once</td>
+                          <td>Pass</td>
+                      </tr>
+                    </tbody>
+                  </table>
                   <h4>Tools Used</h4>
                   <ul class="feature-list">
                     <li><i class="bi bi-tools"></i> Jest for JavaScript testing</li>
@@ -144,11 +220,6 @@
         <div class="row">
           <div class="col-lg-12" data-aos="fade-up">
             <div class="testing-content">
-              <h3>Browser Compatibility</h3>
-              <div class="compatibility-matrix">
-                <!-- Add browser compatibility matrix here -->
-              </div>
-
               <h3 class="mt-4">Device Compatibility</h3>
               <div class="device-testing">
                 <!-- Add device testing results here -->
@@ -199,7 +270,7 @@
                 <!-- Add performance metrics and charts -->
               </div>
 
-              <h3 class="mt-4">Stress Testing</h3>
+              <h3 class="mt-4">Hardware Performance Comparison</h3>
               <div class="stress-test-results">
                 <!-- Add stress testing results -->
               </div>
@@ -219,6 +290,46 @@
         <div class="row">
           <div class="col-lg-12" data-aos="fade-up">
             <div class="testing-content">
+              <p>Usability testing was informally performed throughout the project, but as always, the experience and feedback from external users proved invaluable. With this, our main goals as a team were to:</p>
+
+              <ol>
+                <li>Learn how well the application executes outside of a control environment, i.e. quiet room with a strong microphone.</li>
+                <li>Observe how users of differing demographics interact with the program.</li>
+                <li>Discover previously unknown faults or execution errors.</li>
+                <li>Understand if the experience using the application is enjoyable!</li>
+              </ol>
+
+              <p>Our first usability tests were performed by sixth form students, who were impressed by its intuitive flow, and were intrigued by the rewards system.</p>
+
+              <p>We then took our program to the <b>Helen Allison School</b>, based in <b>Meopham, Kent.</b></p>
+
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Individual(s)</th>
+                    <th>Feedback</th>
+                    <th>Adjustments made (if any)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Class of 12-year-olds</td>
+                    <td>“Children enjoyed singing along with songs they are familiar with”</td>
+                    <td>Playlist creator feature</td>
+                  </tr>
+                  <tr>
+                    <td>Teacher of 12-year-old class</td>
+                    <td>“Visuals for songs”<br>“Colours for words”<br>“Could 2 singers compete against each other?”<br>Progress bar added underneath text, in time with lyric</td>
+                    <td>Progress bar added underneath text, in time with lyric</td>
+                  </tr>
+                  <tr>
+                    <td>Pupil (8-year-old)</td>
+                    <td>“Love music [selection], it was loud”</td>
+                    <td>N/A</td>
+                  </tr>
+                </tbody>
+              </table>
+
               <h3>Test Cases</h3>
               <div class="test-cases">
                 <!-- Add user test cases -->
