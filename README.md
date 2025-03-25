@@ -17,6 +17,6 @@ Edit In Here
 + Evaluation
 + Appendices
   + User manual and deployment manual
-  + GDPR and Privacy of Data
+  + Legal Statement and GDPR
   + Development Blog – External Link on a public site (this should be updated every two weeks)
   + Monthly Video
