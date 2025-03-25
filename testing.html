@@ -77,12 +77,12 @@
 
               <div class="testing-phases mt-4">
                 <h4>Testing Phases</h4>
-                <ul class="feature-list">
-                  <li><i class="bi bi-check-circle"></i> Unit Testing</li>
-                  <li><i class="bi bi-check-circle"></i> Integration Testing</li>
-                  <li><i class="bi bi-check-circle"></i> System Testing</li>
-                  <li><i class="bi bi-check-circle"></i> User Acceptance Testing</li>
-                </ul>
+                  <p>There were three main phases of testing:</p>
+                  <ul class="feature-list">
+                    <li><strong>Unit and performance testing:</strong> Does the application do what it is expected to do, and in a reasonable time?</li>
+                    <li><strong>Integration testing:</strong> Do different components of the application cooperate with each other effectively and efficiently?</li>
+                    <li><strong>User acceptance testing:</strong> Is the application’s user experience (UX) satisfactory for the context of the user and the action being performed?</li>
+                  </ul>
               </div>
             </div>
           </div>
@@ -90,11 +90,11 @@
       </div>
     </section>
 
-    <!-- Unit and Integration Testing Section -->
+    <!-- Performance Testing Section -->
     <section id="unit-integration" class="section">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Unit and Integration Testing</h2>
-        <p>Detailed testing of individual components and their interactions</p>
+        <h2>Unit Testing</h2>
+        <p>Detailed testing of individual components and their performance metrics</p>
       </div>
       <div class="container">
         <div class="row">
@@ -103,7 +103,8 @@
               <div class="test-category">
                 <h3>Unit Testing</h3>
                 <div class="test-details">
-                  <p>We began unit testing with tests for all endpoints of the backend API in the file api_test.py. They were performed with the instruction <code>python -m unittest api_test.py</code>.</p>
+                  <p>To test performance of the application, we looked at whether individual units were executing as expected, and analysed the real metrics of the application functions, through speed and resource use.</p>
+                  <p>We began unit testing with <b>PyTest</b> for all endpoints of the backend API in the file api_test.py. They were performed with the instruction <code>python -m unittest api_test.py</code>.</p>
                   <h4>API unit testing</h4>
                   <table class="table table-bordered">
                     <thead>
