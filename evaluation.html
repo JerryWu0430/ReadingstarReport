@@ -456,7 +456,11 @@
                       </tr>
                     </tbody>
                   </table>
-                  <p>ReadingStar aims for low latency inference for real time ASR, making the NPU the most suitable inference device. This is because the NPU excels at low-latency and energy efficient inference whereas the GPU is optimised for parallel, high-throughput tasks, which is more suitable for training and less ideal for real time inference tasks.</p>
+                  <p>
+                    ReadingStar aims for low latency inference for real time ASR, making the NPU the most suitable inference device. 
+                    This is because the NPU excels at low-latency and energy-efficient inference whereas the GPU is optimised for 
+                    parallel, high-throughput tasks, which is more suitable for training and less ideal for real time inference tasks.
+                  </p>
                 </div>
               </div>
 
@@ -464,15 +468,37 @@
               <div class="evaluation-category mt-4">
                 <h3>Compatibility</h3>
                 <div class="evaluation-details">
-                  <!-- Add compatibility evaluation content -->
+                  <p>
+                    The very choice of React Native for our UI was made with the foremost thought of compatibility in mind. In a world 
+                    where Windows PCs are ubiquitous in households and educational institutions alike, with the long-term aim of distribution 
+                    as a Microsoft Store installable, it is imperative that the app is supported by as many of them as possible.
+                  </p>
+                  <p>
+                    Most Windows PCs run on a form of Intel hardware, meaning that the OpenVINO pipeline included will improve efficiency 
+                    on almost every device that uses ReadingStar. Furthermore, this app can also run at its peak performance due to OpenVINO’s 
+                    NPU compatibility on devices that possess one.
+                  </p>
+                  <p>
+                    In the future, a mobile version could be considered, and as we already have a React Native framework it should not be 
+                    difficult to port it to iOS- or Android-specific usage. This would allow for a wider range of users to access the app,
+                    such as parents of neurodivergent children or even the children themselves.
+                  </p>
                 </div>
               </div>
-
               <!-- Maintainability Evaluation -->
               <div class="evaluation-category mt-4">
                 <h3>Maintainability</h3>
                 <div class="evaluation-details">
-                  <!-- Add maintainability evaluation content -->
+                  <p>
+                    Throughout our project, our team strived to write quality and self-documenting code, ensuring an intuitive “pick-up-and-go” 
+                    development process. Because of this effort on our part, we are very confident that any future engineers can continue 
+                    effectively without difficulty understanding the algorithms. 
+                  </p>
+                  
+                  <p>
+                    We also worked hard to devise an optimal workflow which was reflected in the code. This means that there are no convoluted 
+                    algorithms or redundant functions to trawl through before a change is made. 
+                  </p>
                 </div>
               </div>
 
@@ -512,15 +538,30 @@
               <div class="future-improvements">
                 <h3>Proposed Improvements</h3>
                 <div class="improvement-details">
-                  <h4>UI design</h4>
+                  <h4>Music streaming service integration</h4>
                   <p>
-                    While our choice of UI framework was made with utmost accessibility and compatibility in mind, React Native’s limitations posed challenges throughout the project. 
-                    Despite our strong UX and ease of use, this was the result of the tireless work of our team to implement plenty of innovative and creative features, all while integrating a Python API into a stubborn front-end framework. 
+                    The embedded YouTube player is extremely accessible and simple to use, requiring just a URL to start singing a song. However, its 
+                  drawbacks unfortunately lay with the YouTube guidelines itself. Many songs, such as pop tracks, are blocked from the player, presumably 
+                  due to copyright or ad revenue status. Even if a song is available, it may be rendered unusable in the context of ReadingStar, because 
+                  it has no captions or YouTube cannot auto-generate them accurately for the full song. 
                   </p>
                   <p>
-                    Due to React Native Windows possessing fewer available libraries than its iOS and Android frameworks, this meant we faced issues like the inability to open or close the microphone inside the app, and had to work around this with FastAPI. 
-                    This was just one of many additional efforts we placed on the Python API.
+                    As a team, we explored Spotify integration but quickly abandoned it because of the cost and restrictions placed on lower-tier access 
+                    to its API. Without these constraints, we may consider this an additional music source alongside YouTube. A music streaming service 
+                    sync solves multiple problems for us, namely:
                   </p>
+                  <div class="feature-list">
+                    <ul>
+                      <li><i class="bi bi-check2-square"></i><b>Incomplete lyrics:</b> full and timed lyrics are available for almost every song.</li>
+                      <li><i class="bi bi-check2-square"></i><b>Limited range of songs:</b> over 70 million songs streamable on Spotify, and music videos available too.</li>
+                      <li><i class="bi bi-check2-square"></i><b>Dependency on YouTube:</b> e.g. if a song is removed from YouTube, an alternative platform exists to stream.</li>
+                    </ul>
+                  </div>
+                  <p>
+                    It could operate similarly to Genius, the music lyrics platform, which has a music player on each song page, 
+                    linked to a streaming service (currently Apple Music).
+                  </p>
+
                   <p>
                     Unfortunately, for our project, React Native was one of the only feasible options because we required a responsive, modern, and flexible UI, without sacrificing compatibility. We do note that…
                   </p>
@@ -540,9 +581,12 @@
                     Our current reward system is a simple star pop-up, and points based on similarity accumulated every performance. While this is effective, it may not particularly engaging after multiple performances. 
                     In addition, this was our lowest-scoring area on the feedback form, indicating that our users could grow indifferent to or bored of the existing rewards after a few games. To counter this, we propose 
                     including AI-generated visuals related to the song that appear after a matched lyric, or colourful animations at the end of a song. This would be a great way to keep users engaged and motivated to 
-                    continue playing, especially for younger users. Furthermore, this is another way to increase accessibility and inclusivity, as it was noted that users who have difficulty reading prefer to use images 
-                    to understand the contents of the media source, in this case a song. This would allow them to keep track and sing along by associating the images with words, which in turn could help them learn to read. 
-                    It also means that they are not alienated by ReadingStar, which presumes a basic knowledge of reading and speaking English.
+                    continue playing, especially for younger users. 
+                  </p>
+                  <p>
+                    Furthermore, this is another way to increase accessibility and inclusivity, as it was noted that users who have difficulty reading prefer to use images 
+                    to understand the contents of the media source, in this case a song. Thus, the new visuals would allow them to keep track and sing along by associating the images with words, which in turn could help 
+                    them learn to read. It also means that they would not be alienated by ReadingStar, which presumes a basic knowledge of reading and speaking English.
                   </p>
                 </div>
               </div>
