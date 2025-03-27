@@ -61,7 +61,7 @@
   <main class="main">
 
     <!-- Testing Strategy Section -->
-    <section id="testing-strategy" class="section light-background">
+    <section id="testing-strategy" class="section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Testing Strategy</h2>
         <p>Comprehensive overview of our testing approach and methodologies</p>
@@ -91,9 +91,9 @@
     </section>
 
     <!-- Performance Testing Section -->
-    <section id="unit-integration" class="section">
+    <section id="unit-integration" class="section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Unit Testing</h2>
+        <h2>Unit  & Integration Testing</h2>
         <p>Detailed testing of individual components and their performance metrics</p>
       </div>
       <div class="container">
@@ -104,6 +104,7 @@
                 <h3>Unit Testing</h3>
                 <div class="test-details">
                   <p>To test performance of the application, we looked at whether individual units were executing as expected, and analysed the real metrics of the application functions, through speed and resource use.</p>
+                  <p>Integration testing was included with these API calls, such as playlist management functions, as React Native Windows does not inherently possess capabilities for UI tests.</p>
                   <p>We began unit testing with <b>PyTest</b> for all endpoints of the backend API in the file api_test.py. They were performed with the instruction <code>python -m unittest api_test.py</code>.</p>
                   <h4>API unit testing</h4>
                   <table class="table table-bordered">
@@ -186,20 +187,57 @@
                   </div>-->
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-              <!--<div class="test-category mt-4">
-                <h3>Integration Testing</h3>
-                <div class="test-details">
-                  <h4>Approach</h4>
-                  <p>Description of integration testing approach...</p>
-                  
-                  <h4>Key Integration Test Cases</h4>
-                  <ul class="feature-list">
-                    <li><i class="bi bi-check2-square"></i> API Integration Tests</li>
-                    <li><i class="bi bi-check2-square"></i> Database Integration Tests</li>
-                  </ul>
-                </div>
-              </div>-->
+    <section id="testing-compile" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Compiling</h2>
+        <p>Compilation and build testing of the application</p>
+      </div>
+      <div class="container">
+        <div class="col-lg-12" data-aos="fade-up">
+          <div class="testing-content">
+            <div class="test-details">
+              <h3>Overview</h3>
+              <div class="test-category">
+                <p>
+                  As mentioned previously, our app uses a Python back-end and React Native Windows front-end. In the back-end, model 
+                  inference is performed using the AI models which we converted to OpenVINO (Intermediate Representation) format 
+                  before compiling. The models were downloaded from Hugging Face. Meanwhile, the back-end is accessed using FastAPI 
+                  endpoints, to which the front-end submits GET and POST requests.
+                </p>
+              </div>
+              <h3>Compiling the full stack</h3>
+              <div class="test-details">
+                <p>
+                  We first employed PyInstaller to compile the Python back-end file into an executable. As OpenVINO pipelines are written 
+                  in C++, there is no cost to performance as the pipeline code is the same in both versions. 
+                </p>
+                <p>
+                  Next, we created an .MSIX installer for the React Native app front-end. However, due to MSIX sandboxing, one issue that 
+                  arose when downloading ReadingStar through it was the app’s inability to access localhost. This meant that the front-end 
+                  and back-end could not communicate with each other, as signals from the API would not be picked up. To overcome this, we 
+                  identified the family package name of the application and created a command which gave ReadingStar loopback capabilities.
+                </p>
+              </div>
+              <h3>Packaging the app</h3>
+              <div class="test-details">
+                <p>
+                  Finally, to package the project, we wrote an installer batch file which installs the MSIX and runs the loopback command. 
+                  Then we wrote a launch batch file which initiates the back-end, then the front-end, to ensure that the MSIX front-end is 
+                  able to connect with the back-end API and make requests after installation. 
+                </p>
+              </div>
+              <div class="test-details">
+                <p>
+                  To test, we ran this installer on multiple different Windows PCs. It successfully ran and installed on all devices, 
+                  and the application behaved as expected in all use cases.
+                </p>
+              </div>
             </div>
           </div>
         </div>
