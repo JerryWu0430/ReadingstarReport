@@ -401,7 +401,7 @@ except Exception as e:
                   <br>
                   <p>An instance of the WhisperPipeline is used, along with the desired inference device to create the pipeline.
                   The inference device is set to Auto as the application can run on CPU, NPU, and GPU devices. The pipeline selects the best available device for inference.</p>
-                <br><br>
+                <br>
                 <p>The parameters for ASR are defined after testing different energy thresholds and timeouts. Along with the ASR setup, shared variables are defined to store the previous and current lyric phrases, the current match, and the audio recording setup.</p>
                 <pre><code class="language-python"># Audio recording setup
 energy_threshold = 500
@@ -583,7 +583,7 @@ def get_match():
                     <br>
                     <p>The backend recieves the GET request and pre-processes the lyric to prepare for comparison. The similarity between the recognized text and the current lyric is calculated using SequenceMatcher from the difflib library. The similarity of the previously recognised phrase is also calculated in case of delayed recognition. The function then returns a JSON response with the match status and similarity score. The match status is set to "yes" if the similarity score exceeds the predefined threshold, 
                     otherwise it is set to "no".</p>
-                    <br><br>
+                    <br>
                     <p>The frontend awaits a response, and if the match status is "yes", a star animation is displayed, the score is incremented, and the star is hidden after 3 seconds.</p>
                     <pre><code class="language-javascript">if (result.match === "yes") {
     setShowStar(true);
@@ -593,7 +593,7 @@ def get_match():
                     <br>
                     <p>The score is incremented by multiplying the similarity score calculated by SequenceMatcher by 100 and rounding it to the nearest integer. The star animation is displayed for 3 seconds to provide feedback to the user.</p>
 
-                    <br><br>
+                    <br>
                     <p>Users can change the threshold for similarity to adjust the sensitivity of the matching process. This is done by allowing the users to choose between predefined thresholds by selecting one of the 'AI Difficulty' options in the application.</p>
                     <pre><code class="language-javascript">&lt;Text style={styles.sectionTitle}&gt;AI Difficulty&lt;/Text&gt;
 &lt;ScrollView horizontal&gt;
@@ -657,7 +657,7 @@ def change_threshold(request: ThresholdLevel):
                     <br>
                     <p>The POST request is received by the backend and the threshold is updated based on the difficulty level pressed by the user. The thresholds are predefined after testing with different values and are set to 0.2, 0.35, and 0.5 for easy, medium, and hard respectively. Tests were done with students to determine the most suitable thresholds for each difficulty level.</p>
 
-                    <br><br>
+                    <br>
                     <p>At the end of the session, when a user completes a song, the microphone is closed and the score as well as final % accuracy is displayed to the user.</p>
                     <pre><code class="language-javascript">if (cTime === 'video_end') {
     console.log('Video ended');
@@ -810,7 +810,7 @@ return JSONResponse(content={"final_score": similarity}, status_code=200)</code>
 }</code></pre>
                     <p>This takes the playlist name as a parameter and sets the current playlist to the selected playlist.
                     The user can now select a song from the left hand side panel which displays the songs in the current playlist, and the song is loaded given its YouTube url as shown in the 'YouTube Embedding & Lyric Synchronisation' section.</p>
-                    <br><br>
+                    <br>
                     <p>Users can add to the playlist by pasting a YouTube link to the input field at the top of the application.</p>
                     <pre><code class="language-javascript">// if url not in playlist, fetch song title
 if (!title) {
@@ -900,12 +900,12 @@ def update_playlist(playlist: dict):
                     <br>
                     <p>The backend method update_playlist is used for all playlist management operations. The method reads the current playlist JSON file, and based on the action parameter, either adds, removes, or updates the playlist. In the case of adding a new song to a playlist, the update action is called, which updates the playlist with the new song to be saved in the JSON file.
                     Deleting a song from a playlist also triggers the update action, this can be done by the user pressing the red icon next to the song title.</p>
-                    <br><br>
+                    <br>
                     <p>To delete an entire playlist, the user must press the red icon near the playlist name.</p>
                     <pre><code class="language-javascript">&lt;SvgXml xml={deleteSvg} width={20} height={20} style={styles.iconTag} onPress={() => {removePlaylistJson(playlistName, song.name); fetchPlaylists()}}/></code></pre>
                     <br>
                     <p>When the icon is pressed, the removePlaylistJson function is called, similar to updatePlaylistJson, but with the action set to remove. This triggers a POST request to the backend update_playlist method with a "remove" action which pops all the songs from the playlist, deletes the playlist, and updates the JSON file.</p>
-                    <br><br>
+                    <br>
                     <p>To create a new playlist, a user must type the playlist name into the input field above the existing playlists and press the icon to the right of the input field.</p>
                     <pre><code class="language-javascript">&lt;SvgXml
 xml={createFolderSvg}
@@ -986,7 +986,7 @@ onPress={() => setShowSettingsModal(true)}
                     <br>
                     <p>Pressing the settings icon in the top right hand corner of the applications opens the settings panel. Within the settings panel, users can change the background, font size, font family, font colour, font style, line spacing, and font size.</p>
 
-                    <br><br>
+                    <br>
                     <p>For example for font colour:</p>
                     <pre><code class="language-javascript">&lt;View style={styles.settingBox}&gt;
 &lt;Text style={styles.settingLabel}&gt;Font Color&lt;/Text&gt;
